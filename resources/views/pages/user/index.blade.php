@@ -3,7 +3,6 @@
 @section('title1')Gestion des utilisateurs
 @endsection
 @section('content')
-
 <div class="row">
     {{-- liste --}}
     <div class="col-md-12">

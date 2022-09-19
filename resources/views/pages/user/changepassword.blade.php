@@ -24,7 +24,6 @@
                 <a href="javascript:void(0);" class="brand-logo">
                     <h2 class="brand-text text-primary ml-1">{{ config('app.name') }}</h2>
                 </a>
-
                 <div class="alert alert-danger  px-1" role="alert">
 
                     <p>Bonjour {{ $user->prenom .' '. $user->nom }}, Votre mot de passe actuel a expiré.</p>

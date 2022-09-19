@@ -10,7 +10,6 @@
     <a href="#">Modifier</a>
 @endsection
 @section('page-style')
-
 @endsection
 @section('content')
     <div class="row">

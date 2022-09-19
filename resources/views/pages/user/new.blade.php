@@ -89,6 +89,7 @@
                                 <span class="help-block text-danger">
                                     <li>{{ $errors->first('etat') }}</li>
                                 </span>
+                                
                             @endif
                         </div>
                     </div>

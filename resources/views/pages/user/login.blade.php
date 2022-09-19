@@ -103,7 +103,6 @@
                             <li>{{ $errors->first('login') }}</li>
                         </span>
                     @endif
-
                 <div class="mb-3">
                   <label for="email" class="form-label">Identifiant</label>
                   <input

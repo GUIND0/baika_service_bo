@@ -18,7 +18,6 @@
     <title>{{ config('app.name') }} - Page de connexion</title>
 
     <meta name="description" content="" />
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/new/assets/img/favicon/favicon.ico" />
 

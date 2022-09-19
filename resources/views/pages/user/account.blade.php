@@ -10,7 +10,6 @@
             <li class="nav-item">
                 <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Mon compte</a>
             </li>
-
         </ul>
         <div class="card mb-12">
             <h3 class="card-header">{{ucfirst(auth()->user()->prenom)}} {{ucfirst(auth()->user()->nom)}}</h3>
