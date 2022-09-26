@@ -13,6 +13,7 @@
                     <div class="mb-3 col-md-4">
                         <label for="modele" class="control-label">Modele</label>
                         <select class="form-select {{ $errors->has('modele') ? 'is-invalid' : ''}}" id="modele" name="modele" aria-label="Default select example" aria-placeholder="Choisir modele ..." required>
+                            <option>---- Selectionner le modele ----</option>
                             <option value="Toyota" {{ ($location != null ? $location->modele == 'Toyota' : old('modele')) == "Toyota" ? 'selected' : '' }}>Toyota</option>
                             <option value="Mercedes" {{ ($location != null ? $location->modele == 'Mercedes' : old('modele')) == "Mercedes" ? 'selected' : '' }}>Mercedes</option>
                             <option value="Nissan" {{ ($location != null ? $location->modele == 'Nissan' : old('modele')) == "Nissan" ? 'selected' : '' }}>Nissan</option>
@@ -51,11 +52,11 @@
 
                         @endif
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <div class="form-group">
                             <label class="control-label">Nombre de porte <span class="text-danger">*</span></label>
                             <input type="number" min="1" max="3" name="nbre_porte" class="form-control {{ $errors->has('nbre_porte') ? 'is-invalid' : '' }}"
-                                    value="{{ $location != null ? $location->nbre_portes : old('nbre_porte') }}" placeholder="nbre_porte" required/>
+                                    value="{{ $location != null ? $location->nbre_portes : old('nbre_porte') }}" placeholder="Nombre de porte" required/>
                             @if($errors->has('nbre_porte'))
                             <span class="help-block text-danger">
                                 <li>{{ $errors->first('nbre_porte') }}</li>
@@ -63,11 +64,11 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <div class="form-group">
                             <label class="control-label">Nombre de siege <span class="text-danger">*</span></label>
                             <input type="number" min="1" max="3" name="nbre_siege" class="form-control {{ $errors->has('nbre_siege') ? 'is-invalid' : '' }}"
-                                    value="{{ $location != null ? $location->nbre_sieges : old('nbre_siege') }}" placeholder="nbre_siege" required/>
+                                    value="{{ $location != null ? $location->nbre_sieges : old('nbre_siege') }}" placeholder="Nombre de siege" required/>
                             @if($errors->has('nbre_siege'))
                             <span class="help-block text-danger">
                                 <li>{{ $errors->first('nbre_siege') }}</li>
@@ -75,9 +76,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <label for="vitesse" class="control-label">Vitesse</label>
                         <select class="form-select {{ $errors->has('vitesse') ? 'is-invalid' : ''}}" id="vitesse" name="vitesse" aria-label="Default select example" aria-placeholder="Choisir vitesse ..." required>
+                            <option>----Selectionner Vitesse ----</option>
                             <option value="4" {{ ($location != null ? $location->vitesse == '4' : old('vitesse')) == "4" ? 'selected' : '' }}>4</option>
                             <option value="5" {{ ($location != null ? $location->vitesse == '5' : old('vitesse')) == "5" ? 'selected' : '' }}>5</option>
                             <option value="6" {{ ($location != null ? $location->vitesse == '6' : old('vitesse')) == "6" ? 'selected' : '' }}>6</option>
@@ -89,7 +91,18 @@
 
                         @endif
                     </div>
-
+                    <div class="mb-3 col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Annee <span class="text-danger">*</span></label>
+                            <input type="text" min="1" max="3" name="annee" class="form-control {{ $errors->has('annee') ? 'is-invalid' : '' }}"
+                                    value="{{ $location != null ? $location->annee : old('annee') }}" placeholder="Annee" required/>
+                            @if($errors->has('annee'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('annee') }}</li>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="mb-3 col-md-4">
                         <label for="statut" class="control-label">Statut</label>
@@ -159,18 +172,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-3 col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">Annee <span class="text-danger">*</span></label>
-                            <input type="text" min="1" max="3" name="annee" class="form-control {{ $errors->has('annee') ? 'is-invalid' : '' }}"
-                                    value="{{ $location != null ? $location->annee : old('annee') }}" placeholder="annee" required/>
-                            @if($errors->has('annee'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('annee') }}</li>
-                            </span>
-                            @endif
-                        </div>
-                    </div>
+
                     <div class="mb-3 col-md-4">
                         <div class="form-group">
                             <label class="control-label">Moteur <span class="text-danger">*</span></label>
