@@ -325,11 +325,11 @@
                         <div class="divider-text" style="font-size: 28px">Images</div>
                     </div>
                     @if ($location_images)
-                        @foreach ( $location_images as $location_image)
+                        @foreach ( $location_images as $key => $location_image)
                         <div class="col" id="cl">
                             <div class="mb-3">
                                 <div id="inputFormRow">
-                                <label for="input-file-max-fs">Taille maximum 5Mo </label>
+                                <label for="input-file-max-fs">Image {{ $key }}</label>
                                 <input type="file" id="input-file-max-fs" value="{{ $location_image->path}}" class="dropify" data-max-file-size="5M" data-default-file="{{ $location_image->path}}"  data-allowed-file-extensions="jpeg png jpg" readonly/>
                                 </div>
                             </div>

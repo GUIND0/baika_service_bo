@@ -10,16 +10,16 @@ class Itineraire extends Model
 {
     use HasFactory;
 
-    // protected $primaryKey = 'id';
-    // protected $keyType = 'string';
-    // public $incrementing = false;
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
 
-    // protected static function booted()
-    // {
-    //     static::creating(function ($record) {
-    //         $record->id = (string) Str::uuid();
-    //     });
-    // }
+    protected static function booted()
+    {
+        static::creating(function ($record) {
+            $record->id = (string) Str::uuid();
+        });
+    }
 }
 
