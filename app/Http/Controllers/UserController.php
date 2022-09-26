@@ -32,10 +32,8 @@ class UserController extends Controller
        $users = User::select(
            DB::raw('users.*'),
            DB::raw('roles.libelle as role'),
-           DB::raw('localites.nom as localite'),
            )
         ->leftJoin('roles','users.roles_id','roles.id')
-        ->leftJoin('localites','users.localites_id','localites.id')
         ->orderByDesc('created_at')
         ->get();
         $users =  $users->makeHidden(['password']);
@@ -54,15 +52,13 @@ class UserController extends Controller
             return redirect('/login');
         }
 
-        $localites = Localite::all();
-        $etats = ["actif","inactif"];
+        $etats = [1,0];
         $roles = Role::all();
         $user = null;
         if($user_id){
             $user = User::find($user_id);
         }
         return view('pages.user.new', [
-            'localites' => $localites,
             'roles' => $roles,
             'user' => $user,
             'etats' => $etats
@@ -85,10 +81,9 @@ class UserController extends Controller
                 'nom' => ['required'],
                 'prenom' => ['required'],
                 'role' => ['required'],
-                'localite' => ['required'],
-                'telephone' => ['required','numeric'],
+                'telephone' => ['required','numeric',Rule::unique('users', 'telephone')->ignore($id)],
                 'etat' => ['required'],
-                'email' => ['required', Rule::unique('users', 'email')->ignore($id)],
+                'email' => [ Rule::unique('users', 'email')->ignore($id)],
 
             ]);
             $user = User::findOrFail($id);
@@ -99,14 +94,14 @@ class UserController extends Controller
                 'nom' => ['required'],
                 'prenom' => ['required'],
                 'role' => ['required'],
-                'localite' => ['required'],
-                'telephone' => ['required','numeric'],
+                'telephone' => ['required','numeric','unique:users,telephone'],
                 'etat' => ['required'],
-                'email' => ['required','email','unique:users,email'],
+                'email' => ['email','unique:users,email'],
 
             ]);
             $user = new User();
-            $password = Str::random(10);
+            $password = "123456";
+            // $password = Str::random(6);
             $user->password = bcrypt($password);
         }
 
@@ -114,9 +109,9 @@ class UserController extends Controller
         $user->prenom = request('prenom');
         $user->roles_id = request('role');
         $user->email = request('email');
-        $user->localites_id = request('localite');
         $user->telephone = request('telephone');
-        $user->etat = request('etat');
+        $user->statut = request('etat');
+        $user->sexe = request('genre');
 
          if ($user->save()) {
              if ($id != '' && $id != null) {
@@ -125,7 +120,7 @@ class UserController extends Controller
 
              }else{
                  flash()->success('Succès !', 'Utilisateur ajouté avec succès.');
-                 $this->_sendNewMail("SOS SECURITE", "Voici votre nouveau mot de passe pour accéder a l'espace SOS SECURITE : " . $password, [$user->email]);
+                //  $this->_sendNewMail("BAIKA SERVICE", "Voici votre nouveau mot de passe pour accéder a l'espace BAIKA SERVICE : " . $password, [$user->email]);
                  return redirect("user");
 
              }
@@ -200,7 +195,7 @@ class UserController extends Controller
     public function reset(Request $request)
     {
         $user = User::findOrFail(request('id'));
-        $user->password = bcrypt("azerty");
+        $user->password = bcrypt("123456");
         if ($user->save()) {
             flash()->success('Succès !', 'Mot de passe de l\'utilisateur réinitialisé avec succès.');
             return "ok";
@@ -278,16 +273,17 @@ class UserController extends Controller
 
     //Connexion
     public function connexion(Request $request){
+
         //validation
         request()->validate([
-            'email' => 'required|email',
+            'telephone' => 'required',
             'password' => 'required',
         ]);
         // auth attempt laravel
         $resultat = auth()->attempt([
-            'email' => request('email'),
+            'telephone' => request('telephone'),
             'password' => request('password'),
-            'etat' => "actif",
+            'statut' => 1,
         ]);
 
 
@@ -298,9 +294,8 @@ class UserController extends Controller
             $user->save();
             return redirect()->route('dashboard.index');
         }
-
         return back()->withInput()->withErrors([
-            'login' => 'E-mail ou mot de passe incorrect.',
+            'login' => 'Numero de telephone ou mot de passe incorrect.',
         ]);
     }
 

@@ -34,9 +34,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h5>Localité : <strong>{{ auth()->user()->localite->nom}}</strong></h5>
-                    </div>
-                    <div class="col-md-12">
                         <h5>Role : <strong>{{ auth()->user()->role->libelle}}</strong></h5>
                     </div>
                 </div>
@@ -45,7 +42,7 @@
                     <div class="col-md-12">
                         <h5>Etat :
 
-                        @if (auth()->user()->etat == "actif")
+                        @if (auth()->user()->statut == 1)
                         <span class="badge bg-success">Actif</span>
                         @else
                         <span class="badge bg-danger">Inactif</span>

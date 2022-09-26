@@ -25,15 +25,6 @@
                             </span>
                         @endif
                     </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <input type="text"name ="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''}}" id="description" placeholder="Veuillez saisir le description..."  value="{{ $role != null ? $role->description : old('description') }}" required>
-                        @if($errors->has('description'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('description') }}</li>
-                            </span>
-                        @endif
-                    </div>
                 </div>
                 <div class="mb-3">
                     <div class="row d-flex justify-content-center">
@@ -73,9 +64,9 @@
 @section("script")
 <script>
     $('#table-javascript').bootstrapTable({
-           // data: @json($roles),
-           ajax:"ajaxRequest",
-           queryParams: "queryParams",
+           data: @json($roles),
+        //    ajax:"ajaxRequest",
+        //    queryParams: "queryParams",
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -83,7 +74,7 @@
             pageSize: 10,
             pageList: [10, 25, 50, 100, 200],
             sortOrder: "desc",
-            //sortName: "libelle",
+            sortName: "libelle",
             locale: "fr-FR",
             search: true,
             searchAlign : "right",
@@ -117,12 +108,6 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'description',
-                    title: "Description",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
                     field: 'id',
                     title: "Actions",
                     align: "center",
@@ -138,7 +123,7 @@
 
             $.get(url + '?' + $.param(params.data)).then(function (res) {
             params.success(res);
-          
+
             })
         };
         function queryParams(params)
@@ -151,9 +136,6 @@
                     <div class="btn-group" role="group">
                         <a href="{{ route('role.index','')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
-                        </a>
-                        <a href="{{ route('role.index','')}}/${value}/permission" class="btn btn-outline-info waves-effect" data-toggle="tooltip" title="Voir permission">
-                            <i class="fa fa-eye"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
                             <i class="fa fa-trash"></i>

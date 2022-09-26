@@ -155,10 +155,18 @@
             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
               <div class="mb-2 mb-md-0">
 
-                Developpé Par NOUHOUMOVIC
+                Developpé Par BAIKA SERVICE
 
               </div>
+              <div>
+                <div class="form-check form-control-sm footer-link me-3">
 
+                </div>
+                <div class="dropdown dropup footer-link me-3">
+
+                </div>
+                <a href="{{ route('deconnexion') }}" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Logout</a>
+              </div>
             </div>
           </footer>
           <!-- / Footer -->
@@ -178,6 +186,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script> --}}
  <script src="{{ url('/app-assets/bootstrap3-typeahead.min.js')}}"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+ {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 <style>
     #custom-templates .empty-message {
         padding: 5px 10px;

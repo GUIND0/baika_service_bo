@@ -24,66 +24,119 @@
                 <div data-i18n="Analytics">Tableau de bord</div>
             </a>
         </li>
-
-        <li class="menu-item {{ (request()->routeIs('sinistre.index')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons fa fa-free-code-camp text-primary"></i>
-                <div data-i18n="Analytics">Reservation</div>
+        <li class="menu-item {{ (request()->routeIs('ticket.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-id-card text-primary"  style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Tickets</div>
             </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('ticket.index')) ? 'active' : '' }}">
+                    <a href="{{ route('ticket.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('ticket.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('ticket.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ (request()->routeIs('location.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-car text-primary" style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Location de voiture</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('location.index')) ? 'active' : '' }}">
+                    <a href="{{ route('location.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('location.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('location.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ (request()->routeIs('automobile.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-truck text-primary" style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Automobile</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('automobile.index')) ? 'active' : '' }}">
+                    <a href="{{ route('automobile.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('automobile.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('automobile.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ (request()->routeIs('itineraire.*') || request()->routeIs('quartier.*') ) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-globe text-primary" style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Itinéraire/Quartier</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('itineraire.index')) ? 'active' : '' }}">
+                    <a href="{{ route('itineraire.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Itinéraire</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('quartier.index')) ? 'active' : '' }}">
+                    <a href="{{ route('quartier.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Quartier</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="menu-item {{ (request()->routeIs('actualite.list') || request()->routeIs('actualite.create_or_update')) ? 'active' : '' }}">
             <a href="#" class="menu-link">
-                <i class="menu-icon tf-icon fa fa-globe text-primary"></i>
+                <i class="menu-icon fa fa-users text-primary" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Chauffeur</div>
             </a>
         </li>
 
-        <li class="menu-item {{ (request()->routeIs('conseil.list')  || request()->routeIs('conseil.create_or_update')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-info-circle text-primary"></i>
-                <div data-i18n="Analytics">Location de voiture</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ (request()->routeIs('alerte.list')  || request()->routeIs('alerte.create_or_update')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-bell-plus text-primary"></i>
-                <div data-i18n="Analytics">Taxi-moto</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ (request()->routeIs('service.index')  || request()->routeIs('service.*')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icon bx bx-map text-primary" ></i>
-                <div data-i18n="Analytics">Tourisme</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ (request()->routeIs('region.index')) || (request()->routeIs('numero-utile.index')) || (request()->routeIs('texte.index')) || (request()->routeIs('numero-utile.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
+        <li class="menu-item {{ (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icon fa fa-list text-primary"></i>
+                <i class="menu-icon tf-icon fa fa-list text-primary" style="font-size:20px;"></i>
                 <div data-i18n="Account Settings">Autres</div>
             </a>
             <ul class="menu-sub">
-
-                <li class="menu-item {{ (request()->routeIs('numero-utile.index')) ? 'active' : '' }}">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ (request()->routeIs('compagnie.index')) ? 'active' : '' }}">
+                    <a href="{{ route('compagnie.index') }}" class="menu-link">
                         <div data-i18n="Perfect Scrollbar">Compagnie</div>
                     </a>
                 </li>
 
-                <li class="menu-item {{ (request()->routeIs('texte.index')) ? 'active' : '' }}">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Text Divider">Axes</div>
+                <li class="menu-item {{ (request()->routeIs('trajet.index')) ? 'active' : '' }}">
+                    <a href="{{ route('trajet.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Trajet</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('type_location.index')) ? 'active' : '' }}">
+                    <a href="{{ route('type_location.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Type Location</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('type_auto.index')) ? 'active' : '' }}">
+                    <a href="{{ route('type_auto.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Type Auto</div>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="menu-item {{ (request()->routeIs('user.*')) || (request()->routeIs('role.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cog text-primary"></i>
+                <i class="menu-icon tf-icons bx bx-cog text-primary" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Paramètres</div>
             </a>
             <ul class="menu-sub">

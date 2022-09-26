@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" placeholder="Veuillez saisir l'email..."  value="{{ $user != null ? $user->email : old('email') }}" required>
+                            <input type="text" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" placeholder="Veuillez saisir l'email..."  value="{{ $user != null ? $user->email : old('email') }}">
                             @if($errors->has('email'))
                                 <span class="help-block text-danger">
                                     <li>{{ $errors->first('email') }}</li>
@@ -66,31 +66,32 @@
                             @endif
                         </div>
                         <div class="mb-3">
-                            <label for="localite" class="form-label">Localité</label>
-                            <select data-placeholder="Choisir localite ..." class="form-select" id="localite" name="localite" aria-label="Choisir un localite" required>
-                                <option value=""> --- Veuillez selectionner une localité ---</option>
-                                @foreach($localites as $localite)
-                                    <option {{ ($user == null ? '' : ($user->localites_id == $localite->id)) ? 'selected' : ''  }} {{ old('localite') == $localite->id ? 'selected' : '' }} value="{{ $localite->id }}">{{ $localite->nom }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('localite'))
-                                <span class="help-block text-danger">
-                                    <li>{{ $errors->first('localite') }}</li>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="mb-3">
-                            <label for="etat" class="form-label">Etat</label>
-                            <select class="form-select {{ $errors->has('etat') ? 'is-invalid' : ''}}" id="etat" name="etat" aria-label="Default select example" aria-placeholder="Choisir" required>
-                                <option value="actif" {{ ($user != null ? $user->etat == "actif" : old('etat')) == "Actif" ? 'selected' : '' }}>Actif</option>
-                                <option value="inactif" {{ ($user != null ? $user->etat == "inactif" : old('etat') )== "Inactif" ? 'selected' : '' }}>Inactif</option>
+                            <label for="etat" class="form-label">Statut</label>
+                            <select class="form-select {{ $errors->has('etat') ? 'is-invalid' : ''}}" id="etat" name="etat" aria-label="Default select example" aria-placeholder="Choisir statut ..." required>
+                                <option value="1" {{ ($user != null ? $user->statut == 1 : old('etat')) == "Actif" ? 'selected' : '' }}>Actif</option>
+                                <option value="0" {{ ($user != null ? $user->statut == 0 : old('etat') )== "Inactif" ? 'selected' : '' }}>Inactif</option>
                                 </select>
                             @if($errors->has('etat'))
                                 <span class="help-block text-danger">
                                     <li>{{ $errors->first('etat') }}</li>
                                 </span>
-                                
+
                             @endif
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label for="Genre">Sexe <span class="text-danger">*</span></label>
+                                <select data-placeholder="Choisir genre ..." class="form-select" id="genre" name="genre" ria-placeholder="Choisir sexe ..." >
+                                    <option></option>
+                                    <option value="H" {{ ($user != null ? $user->sexe == "H" : old('genre')) == "Homme" ? 'selected' : ''}}>Homme</option>
+                                    <option value="F" {{($user != null ? $user->sexe == "F" : old('genre')) == "Femme" ? 'selected' : '' }}>Femme</option>
+                                </select>
+                                @if($errors->has('genre'))
+                                <span class="help-block text-danger">
+                                    <ul user="alert"><li>{{ $errors->first('genre') }}</li></ul>
+                                </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -109,23 +110,6 @@
             </div>
         </div>
     </div>
-
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="Genre">Genre <span class="text-danger">*</span></label>
-                                <select data-placeholder="Choisir genre ..." class="select2 form-control" id="genre" name="genre" required>
-                                    <option></option>
-                                    <option value="Homme" {{ old('genre') == "Homme" ? 'selected' : '' }}>Homme</option>
-                                    <option value="Femme" {{ old('genre') == "Femme" ? 'selected' : '' }}>Femme</option>
-                                </select>
-                                @if($errors->has('genre'))
-                                <span class="help-block text-danger">
-                                    <ul user="alert"><li>{{ $errors->first('genre') }}</li></ul>
-                                </span>
-                                @endif
-                            </div>
-                        </div> --}}
 @endsection
 
 @section('script')

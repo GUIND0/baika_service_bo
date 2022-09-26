@@ -30,9 +30,9 @@
 <script>
 
         $('#table-javascript').bootstrapTable({
-            //data: @json($users),
-             ajax:"ajaxRequest",
-            queryParams: "queryParams",
+            data: @json($users),
+            //  ajax:"ajaxRequest",
+            // queryParams: "queryParams",
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -40,7 +40,7 @@
             pageSize: 10,
             pageList: [10, 25, 50, 100, 200],
             sortOrder: "desc",
-            //sortName: "libelle",
+            sortName: "libelle",
             locale: "fr-FR",
             search: true,
             searchAlign : "right",
@@ -86,20 +86,14 @@
                     filterControl: "select",
                 },
                 {
-                    field: 'localite',
-                    title: "Localité",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
                     field: 'email',
                     title: "E-mail",
                     sortable: true,
                     filterControl: "input",
                 },
                 {
-                    field: 'etat',
-                    title: "Etat",
+                    field: 'statut',
+                    title: "Statut",
                     sortable: true,
                     filterControl: "input",
                     align : "center",
@@ -128,7 +122,7 @@
 
             $.get(url + '?' + $.param(params.data)).then(function (res) {
             params.success(res);
-          
+
             })
         };
         function queryParams(params)
@@ -154,7 +148,7 @@
         }
 
         function actifFormatter(value, row, index){
-            if(value == 'actif'){
+            if(value == 1){
               return '<span class="badge bg-success">Actif</span>';
             }
             return '<span class="badge bg-danger">Inactif</span>';
@@ -175,8 +169,31 @@
             }
         }
 
-       
-        
+
+        $('body').on('click', '.deleteBtn', function (e) {
+            e.preventDefault()
+            Swal.fire({
+                title: 'Confirmation !',
+                text: "Voulez-vous vraiment supprimer ce utilisateur ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer!',
+                cancelButtonText: "Annuler",
+                customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-outline-danger ml-1',
+                closeOnConfirm: false
+                },
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    loader();
+                    $(e.target).closest('form').submit();
+                }
+            });
+
+        });
+
         $('body').on('click', '.reset', function(e){
             e.preventDefault();
             var id = $(this).data('id');
@@ -209,7 +226,7 @@
                         },
                         success:function(result){
                             if(result=="ok"){
-                                window.location.href = "{{ route('user.index')}}";
+                               window.location.href = "{{ route('user.index')}}";
                             }
                         }
                     });
@@ -217,7 +234,7 @@
             });
         });
 
-        
+
 
         $('body').on('click', '.deleteBtn', function (e) {
             e.preventDefault()

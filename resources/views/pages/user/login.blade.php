@@ -104,26 +104,26 @@
                         </span>
                     @endif
                 <div class="mb-3">
-                  <label for="email" class="form-label">Identifiant</label>
+                  <label for="telephone" class="form-label">Telephone</label>
                   <input
                     type="text"
                     class="form-control"
-                    value="{{ old('email') }}" name="email" id="email"
-                    placeholder="Email"
+                    value="{{ old('telephone') }}" pattern="[0-9]{8}" name="telephone" id="telephone"
+                    placeholder="telephone"
                     autofocus
                   />
-                  @if($errors->has('email'))
+                  @if($errors->has('telephone'))
                     <span class="help-block text-danger">
-                        <li>{{ $errors->first('email') }}</li>
+                        <li>{{ $errors->first('telephone') }}</li>
                     </span>
                   @endif
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Mot de passe</label>
-                    <a href="{{ route('mot_de_passe.form') }}">
+                    {{-- <a href="{{ route('mot_de_passe.form') }}">
                       <small>Mot de passe oublié?</small>
-                    </a>
+                    </a> --}}
                   </div>
                   <div class="input-group input-group-merge">
                     <input type="password" class="form-control" name="password" id="password" placeholder="......"  aria-describedby="password" />
@@ -136,17 +136,17 @@
                  @endif
                 </div>
 
-                <div class="g-recaptcha" data-sitekey="{{ config('app.reCAPTCHA') }}"></div>
+                {{-- <div class="g-recaptcha" data-sitekey="{{ config('app.reCAPTCHA') }}"></div>
                 @if($errors->has('g-recaptcha-response'))
                     <span class="help-block text-danger">
                         <li>{{ $errors->first('g-recaptcha-response') }}</li>
                     </span>
-                 @endif
+                 @endif --}}
                 <div class="mt-2 mb-3">
-                  {{-- <button class="btn btn-primary d-grid w-100" type="submit">Se connecter</button> --}}
+                  <button class="btn btn-primary d-grid w-100" type="submit">Se connecter</button>
                 </div>
               </form>
-              <a class="btn btn-primary d-grid w-100" href="{{route('dashboard.index')}}">Se connecter</a>
+              {{-- <a class="btn btn-primary d-grid w-100" href="{{route('dashboard.index')}}">Se connecter</a> --}}
 
             </div>
           </div>

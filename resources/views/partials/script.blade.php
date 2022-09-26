@@ -47,6 +47,7 @@
 <script src="{{ url('/app-assets/summernote/dist/summernote.min.js')}}"></script>
 
 <script src="{{ url('/toast-master/js/jquery.toast.js')}}"></script>
+<script src="{{ url('/mask/dist/jquery.mask.min.js')}}" type="text/javascript"></script>
 
 
 @yield('addjs')
