@@ -15,7 +15,14 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $ticket->id ?? '' }}">
                 <div class="card-body">
+                    <div class="mb-3 col-md-6">
+                        <div class="form-group">
+                            (<span class="text-danger">*</span>)Champs Obligatoires
+                        </div>
+                    </div>
                    <div class="row">
+
+
                     <div class="mb-3 col-md-6">
                         <label class="control-label">Ticket Restant <span class="text-danger"> *</span></label>
                         <input type="numeric" name="ticket_restant" class="form-control {{ $errors->has('ticket_restant') ? 'is-invalid' : '' }}"
@@ -100,11 +107,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 col-md-6">
-                        <div class="form-group">
-                            (<span class="text-danger">*</span>)Champs Obligatoires
-                        </div>
-                    </div>
 
                     </div>
                 </div>

@@ -1,5 +1,7 @@
 @extends('partials.main')
 
+@section('title1')Liste des automobiles
+@endsection
 @section('content')
 <div class="row">
     {{-- liste --}}

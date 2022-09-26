@@ -1,5 +1,6 @@
 @extends('partials.main')
-
+@section('title1')Liste des locations
+@endsection
 @section('content')
 <div class="row">
     {{-- liste --}}

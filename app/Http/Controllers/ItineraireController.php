@@ -50,7 +50,7 @@ class ItineraireController extends Controller
 
         $itineraire->quartiers_id = request('depart');
         $itineraire->quartiers_id1 = request('arrive');
-        $itineraire->prix = request('prix');
+        $itineraire->prix = str_replace(' ', '',  request('prix'));
 
         if($itineraire->save()){
             flash()->success('Succès  !', 'Itineraire enregistré avec succès');

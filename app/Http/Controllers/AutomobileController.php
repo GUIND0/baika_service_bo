@@ -44,6 +44,7 @@ class AutomobileController extends Controller
                 'caracteristique' => ['required'],
                 'description' => ['required'],
                 'type_auto' => ['required'],
+                'statut' => ['required'],
 
             ]);
             $automobile = Automobile::findOrFail($id);
@@ -52,6 +53,8 @@ class AutomobileController extends Controller
                 'caracteristique' => ['required'],
                 'description' => ['required','numeric'],
                 'type_auto' => ['required'],
+                'statut' => ['required'],
+
             ]);
             $automobile = new automobile();
         }

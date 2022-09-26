@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 use App\Models\Location;
@@ -11,9 +12,13 @@ class LocationController extends Controller
 {
     public function create_or_update($id = null)
     {
+        $location_images =null;
+
         $location = null;
         if ($id != null) {
             $location = Location::findOrFail($id);
+            $location_images = Image::where('locations_id',$location->id)->get();
+
         }
         $type_locations = TypeLocation::all();
         $carburant =['Essence','Gazoil'];
@@ -21,8 +26,7 @@ class LocationController extends Controller
         $etat = ['Neuf','France au revoir','Mauvaise'];
         $modele = ['Toyota','Mercedes','Nissan'];
         $statut = [1,0];
-
-        return view('pages.locations.create_or_update', compact('statut','modele','type_locations','location', 'carburant','vitesse','etat'));
+        return view('pages.locations.create_or_update', compact('location_images','statut','modele','type_locations','location', 'carburant','vitesse','etat'));
 
     }
 
@@ -46,24 +50,30 @@ class LocationController extends Controller
         if ($id != '') {
             request()->validate([
                 'modele' => ['required'],
-                'etat' => ['required','numeric'],
-                'carburant' => ['required'],
-                'vitesse' => ['required'],
                 'etat' => ['required'],
+                'carburant' => ['required'],
+                'couleur_exterieure' => ['required'],
                 'type_location' => ['required'],
+                'nbre_porte' => ['required'],
+                'prix' => ['required'],
+                'images' => ['required'],
+
             ]);
             $location = Location::findOrFail($id);
         } else {
             request()->validate([
                 'modele' => ['required'],
-                'etat' => ['required','numeric'],
-                'carburant' => ['required'],
-                'vitesse' => ['required'],
                 'etat' => ['required'],
+                'carburant' => ['required'],
+                'couleur_exterieure' => ['required'],
                 'type_location' => ['required'],
+                'nbre_porte' => ['required'],
+                'prix' => ['required'],
+                'images' => ['required'],
             ]);
             $location = new location();
         }
+
         $location->modele = request('modele');
         $location->etat = request('etat');
         $location->version = request('version');
@@ -72,6 +82,7 @@ class LocationController extends Controller
         $location->carburant = request('carburant');
         $location->transmission = request('transmission');
         $location->salon = request('salon');
+        $location->moteur = request('moteur');
         $location->carrosserie = request('carrosserie');
         $location->vitesse = request('vitesse');
         $location->puissance = request('puissance');
@@ -82,11 +93,35 @@ class LocationController extends Controller
         $location->couleur_exterieure = request('couleur_exterieure');
         $location->couleur_interieure = request('couleur_interieure');
         $location->description = request('description');
-        $location->prix = request('prix');
+        $location->prix = str_replace(' ', '',  request('prix'));
         $location->categorie = request('categorie');
         $location->type_locations_id = request('type_location');
         $location->statut = request('statut');
-       // $location->images_id = request('images');
+
+
+       $images = request('images');
+       $location->save();
+       if($images){
+
+
+        foreach($request->file('images') as $image){
+
+            if ($image || $image != null) {
+                $file =$image;
+                $filename = uniqid() . '.' . $image->extension();
+                $filePath = public_path() . '/files/images/locations/';
+                $file->move($filePath, $filename);
+
+                $imageObj = new Image();
+                $imageObj->locations_id =  $location->id;
+                $imageObj->path =  '/files/images/locations/' . $filename;
+
+                $imageObj->save();
+
+            }
+        }
+    }
+
 
 
 
@@ -99,10 +134,27 @@ class LocationController extends Controller
         return back();
     }
 
+    public function deleteImage($id)
+    {
+        //dd('ok');
+        $uploadDir  = public_path() . '/files/images/locations/';
+        $image = Image::find($id);
+       // unlink($uploadDir . $audio->file);
+        $image->forcedelete();
+        return "done";
+    }
+
     public function delete($id = null)
     {
 
         $location = Location::findOrFail($id);
+        $images = Image::where('locations_id',$location->id)->get();
+
+        foreach( $images as $image){
+            $image = Image::find($id);
+            // unlink($uploadDir . $audio->file);
+             $image->forcedelete();
+        }
         if ($location->forceDelete()) {
             return "done";
         } else {

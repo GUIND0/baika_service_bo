@@ -1,6 +1,6 @@
 
 @extends('partials.main')
-@section('title1')itineraires
+@section('title1')tineraires
 @endsection
 @section('style')
 <style>
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="prix" class="form-label">Prix</label>
-                        <input type="text"name ="prix" class="form-control {{ $errors->has('prix') ? 'is-invalid' : ''}}" id="prix" placeholder="Veuillez saisir le prix..."  value="{{ $itineraire != null ? $itineraire->prix : old('prix') }}" required>
+                        <input type="text" id="prix" name ="prix" class="form-control prix {{ $errors->has('prix') ? 'is-invalid' : ''}}" id="prix" placeholder="Veuillez saisir le prix..."  value="{{ $itineraire != null ? $itineraire->prix : old('prix') }}" required>
                         @if($errors->has('prix'))
                             <span class="help-block text-danger">
                                 <li>{{ $errors->first('prix') }}</li>
@@ -26,8 +26,8 @@
                         @endif
                     </div>
                     <div class="md-3">
-                        <label>Depart</label><span class="text-danger">*</span>
-                        <select class="form-control" name="depart" id="depart"  style="width: 100%;">'
+                        <label class="form-label">Depart</label><span class="text-danger"> *</span>
+                        <select class="form-control" name="depart" id="depart"  style="width: 100%;">
                             <option value=""> --- Veuillez selectionner un depart ---</option>
                             @foreach($quartiers as $quartier)
                                 <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('depart') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
@@ -40,8 +40,8 @@
                         @endif
                     </div>
                     <div class="md-3">
-                        <label>Arrive</label><span class="text-danger">*</span>
-                        <select class="form-control" name="arrive" id="arrive"  style="width: 100%;">'
+                        <label class="form-label">Arrive</label><span class="text-danger"> *</span>
+                        <select class="form-control" name="arrive" id="arrive"  style="width: 100%;">
                             <option value=""> --- Veuillez selectionner un arrive ---</option>
                             @foreach($quartiers as $quartier)
                                 <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('arrive') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
@@ -249,4 +249,11 @@
 <script type="text/javascript">
 
 </script>
+<script>
+    $(function() {
+     $('.prix').mask("# ##0", {reverse: true});
+   })
+
+
+ </script>
 @endsection

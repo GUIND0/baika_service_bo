@@ -1,5 +1,6 @@
 @extends('partials.main')
-
+@section('title1')Ajout d'un automobile
+@endsection
 @section('content')
 <div class="row">
     {{--create form --}}
@@ -9,11 +10,15 @@
         <input type="hidden" name="id" value="{{ $automobile->id ?? '' }}">
         <div class="card card-box">
             <div class="card-body">
+                <div class="mb-3 col-md-12">
+                    <div class="form-group">
+                        (<span class="text-danger">*</span>) Champs Obligatoires
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Type Automobile</label><span class="text-danger">*</span>
-                            <select class="form-control" name="type_auto" id="type_auto"  style="width: 100%;">'
+                    <div class="mb-3 col-6">
+                            <label  class="form-label">Type Automobile</label><span class="text-danger"> *</span>
+                            <select class="form-control {{ $errors->has('type_auto') ? 'is-invalid' : ''}}" name="type_auto" id="type_auto"  style="width: 100%;" required>
                                 <option value=""> --- Veuillez selectionner un type auto ---</option>
                                 @foreach($type_autos as $type_auto)
                                     <option {{ $automobile != null ? $automobile->type_auto_id == $type_auto->id ? 'selected' : '' : old('type_auto') == $type_auto->id ? 'selected' : '' }} value="{{ $type_auto->id }}"> {{ $type_auto->libelle }}</option>
@@ -24,11 +29,11 @@
                                     <ul role="alert"><li>{{ $errors->first('type_auto') }}</li></ul>
                                 </span>
                             @endif
-                        </div>
                     </div>
-                    <div class="col-6">
-                        <label for="statut" class="form-label">Statut</label>
-                        <select class="form-select {{ $errors->has('statut') ? 'is-invalid' : ''}}" id="statut" name="statut" aria-label="Default select example" aria-placeholder="Choisir statut ..." required>
+                    <div class="mb-3 col-6">
+                        <label for="statut" class="form-label">Statut</label><span class="text-danger"> *</span>
+                        <select class="form-control {{ $errors->has('statut') ? 'is-invalid' : ''}}" id="statut" name="statut" aria-label="Default select example" aria-placeholder="Choisir statut ..." required>
+                            <option value="">-- Statut --</option>
                             <option value="1" {{ ($automobile != null ? $automobile->statut == '1' : old('statut')) == "Libre" ? 'selected' : '' }}>Libre</option>
                             <option value="0" {{ ($automobile != null ? $automobile->statut == '0' : old('statut')) == "Loue" ? 'selected' : '' }}>Loue</option>
                             </select>
@@ -39,22 +44,10 @@
 
                         @endif
                     </div>
-                    {{-- <div class="col-6">
-                        <div class="form-group">
-                            <label class="control-label">Prix <span class="text-danger">*</span></label>
-                            <input type="number" min="1" max="3" name="prix" class="form-control {{ $errors->has('prix') ? 'is-invalid' : '' }}"
-                                    value="{{ $automobile != null ? $automobile->prix : old('prix') }}" placeholder="Prix" required/>
-                            @if($errors->has('prix'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('prix') }}</li>
-                            </span>
-                            @endif
-                        </div>
-                    </div> --}}
 
-                    <div class="col-6">
+                    <div class="mb-3 col-6">
                         <div class="form-group">
-                            <label class="control-label">Caracteristique <span class="text-danger">*</span></label>
+                            <label class="control-label">Caracteristique <span class="text-danger"> *</span></label>
                             <input type="text" name="caracteristique" class="form-control {{ $errors->has('caracteristique') ? 'is-invalid' : '' }}"
                                     value="{{ $automobile != null ? $automobile->caracteristique : old('caracteristique') }}" placeholder="caracteristique" required/>
                             @if($errors->has('caracteristique'))
@@ -66,7 +59,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="control-label">Description <span class="text-danger">*</span></label>
+                            <label class="control-label">Description <span class="text-danger"> *</span></label>
                             <input type="text" name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                     value="{{ $automobile != null ? $automobile->description : old('description') }}" placeholder="description" required/>
                             @if($errors->has('description'))

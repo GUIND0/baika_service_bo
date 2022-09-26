@@ -106,6 +106,8 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/location/{id?}', [LocationController::class, 'create_or_update'])->name('location.create_or_update');
     Route::post('location/store', [LocationController::class, 'store'])->name('location.store');
     Route::delete('location/delete/{id}', [LocationController::class, 'delete'])->name('location.delete');
+    Route::get('/location/deleteImage/{id}', [LocationController::class, 'deleteImage'])->name('location.deleteImage');
+
 
     // Location
     Route::get('automobiles', [AutomobileController::class, 'index'])->name('automobile.index');

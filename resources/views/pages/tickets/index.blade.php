@@ -191,11 +191,5 @@
         });
 
 </script>
-<script>
-  $(function() {
-    $('#toFormat1').maskMoney();
-    $('#toFormat2').maskMoney();
-    $('#toFormat3').maskMoney();
-  })
-</script>
+
 @endsection
