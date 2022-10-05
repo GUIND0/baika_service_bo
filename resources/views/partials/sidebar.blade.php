@@ -19,14 +19,14 @@
     <ul class="menu-inner py-3">
         <!-- Dashboard -->
         <li class="menu-item {{ (request()->routeIs('dashboard.index')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons fa fa-tachometer text-primary"></i>
+            <a href="{{ route('dashboard.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons fa fa-tachometer text-dark"></i>
                 <div data-i18n="Analytics">Tableau de bord</div>
             </a>
         </li>
         <li class="menu-item {{ (request()->routeIs('ticket.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa fa-id-card text-primary"  style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-id-card text-dark"  style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Tickets</div>
             </a>
             <ul class="menu-sub">
@@ -44,7 +44,7 @@
         </li>
         <li class="menu-item {{ (request()->routeIs('location.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa fa-car text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-car text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Location de voiture</div>
             </a>
             <ul class="menu-sub">
@@ -62,7 +62,7 @@
         </li>
         <li class="menu-item {{ (request()->routeIs('automobile.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa fa-truck text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-truck text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Automobile</div>
             </a>
             <ul class="menu-sub">
@@ -80,7 +80,7 @@
         </li>
         <li class="menu-item {{ (request()->routeIs('itineraire.*') || request()->routeIs('quartier.*') ) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa fa-globe text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-globe text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Itinéraire/Quartier</div>
             </a>
             <ul class="menu-sub">
@@ -99,7 +99,7 @@
 
         <li class="menu-item {{ (request()->routeIs('actualite.list') || request()->routeIs('actualite.create_or_update')) ? 'active' : '' }}">
             <a href="#" class="menu-link">
-                <i class="menu-icon fa fa-users text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-users text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Chauffeur</div>
             </a>
         </li>
@@ -107,7 +107,7 @@
         <li class="menu-item {{ (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icon fa fa-list text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon tf-icon fa fa-list text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Account Settings">Autres</div>
             </a>
             <ul class="menu-sub">
@@ -136,7 +136,7 @@
         </li>
         <li class="menu-item {{ (request()->routeIs('user.*')) || (request()->routeIs('role.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cog text-primary" style="font-size:20px;"></i>
+                <i class="menu-icon tf-icons bx bx-cog text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Paramètres</div>
             </a>
             <ul class="menu-sub">

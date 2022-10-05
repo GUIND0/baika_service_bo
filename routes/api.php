@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:sanctum']],function(){
 
 });
+
+
+Route::get('/automobiles', [ApiController::class, 'automobiles']);
+Route::get('/automobile/{automobile_id}', [ApiController::class, 'automobile']);

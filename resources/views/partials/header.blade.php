@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name') }}</title>
-  <link rel="icon" type="image/x-icon" href="/templatef/img/favicon/favicon.ico" />
+  <title>BEKST</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('files/images/logoback.png') }}" />
   {{-- jquery css and datatable --}}
   {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">

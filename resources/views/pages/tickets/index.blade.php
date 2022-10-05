@@ -8,7 +8,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('ticket.create_or_update') }}" id="addRow" class="btn btn-outline-primary">
+                    <a href="{{ route('ticket.create_or_update') }}" id="addRow" class="btn btn-outline-success">
                         <i class="fa fa-plus"></i> Nouveau Ticket
                     </a>
                 </div>
@@ -116,7 +116,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
-                        <a href="{{ route('ticket.create_or_update')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ route('ticket.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">

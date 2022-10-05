@@ -5,7 +5,7 @@
 <div class="row">
     {{--create form --}}
     <div class="col-md-12">
-    <form action="{{ route('automobile.store') }}" method='POST' role="form" id="form">
+    <form action="{{ route('automobile.store') }}" method='POST' role="form" id="form" enctype="multipart/form-data">
             @csrf
         <input type="hidden" name="id" value="{{ $automobile->id ?? '' }}">
         <div class="card card-box">
@@ -69,12 +69,23 @@
                             @endif
                         </div>
                     </div>
+                    <div class="mb-3 col-md-12">
+                        <div id="inputFormRow">
+                          <label for="input-file-max-fs">Image |<small>Taille maximum 5Mo</small> <span class="text-danger">*</span></label>
+                          <input type="file" id="input-file-max-fs" value="{{ $automobile_image ? $automobile_image->path : ""}}" name="image" class="dropify {{ $errors->has('image') ? 'is-invalid' : ''}}" data-max-file-size="5M" data-default-file="{{ $automobile_image !=null ? $automobile_image->path : ""}}"  data-allowed-file-extensions="jpeg png jpg" />
+                          @if($errors->has('image'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('image') }}</li>
+                            </span>
+                          @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
                 <div class="row d-flex justify-content-center">
                     <div class="demo-inline-spacing d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">
                             <i class="fa fa-save mr-1"></i> Enregistrer
                         </button>
                         <button type="reset" class="btn btn-danger">
@@ -95,6 +106,18 @@
     $('#toFormat2').maskMoney();
     $('#toFormat3').maskMoney();
   })
+  $('.dropify').dropify({
+        messages: {
+            default: 'Glissez-déposez un fichier ici ou cliquez',
+            replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+            remove: 'Supprimer',
+            error: 'Désolé, fichier trop volumineux'
+        },
+        error: {
+            'fileSize': 'Désolé, fichier trop volumineux.',
+            'imageFormat': 'Seul les formats (xxx sont autorisés).'
+        }
+    });
   $('.timepicker').datetimepicker({
     format: 'HH:mm',
 

@@ -81,12 +81,12 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2 justify-content-center">
+                <a href="" class="app-brand-link gap-2 justify-content-center">
                   <img src="{{ asset('files/images/logo.png') }}"  width="250" height="250" alt="">
                 </a>
               </div>
               <!-- /Logo -->
-              <h4>Bienvenue BAIKA SERVICE</h4>
+              <h4>BienvenueBEKST</h4>
               <p>Veuillez-vous connecter.</p>
               @if(isset($message))
                 <div class="alert alert-success mt-1 alert-validation-msg" role="alert">
@@ -143,7 +143,7 @@
                     </span>
                  @endif --}}
                 <div class="mt-2 mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Se connecter</button>
+                  <button class="btn btn-success d-grid w-100" type="submit">Se connecter</button>
                 </div>
               </form>
               {{-- <a class="btn btn-primary d-grid w-100" href="{{route('dashboard.index')}}">Se connecter</a> --}}

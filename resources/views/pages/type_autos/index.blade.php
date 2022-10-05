@@ -29,7 +29,7 @@
                 <div class="mb-3">
                     <div class="row d-flex justify-content-center">
                         <div class="demo-inline-spacing d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fa fa-save mr-1"></i> Enregistrer
                             </button>
                             <button type="reset" class="btn btn-danger">
@@ -45,7 +45,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('type_auto.index') }}"  class="btn btn-outline-primary">
+                    <a href="{{ route('type_auto.index') }}"  class="btn btn-outline-success">
                         <i class="fa fa-plus"></i> Nouveau
                     </a>
                 </div>
@@ -120,7 +120,7 @@
         function actionsFormatter(value, row, index) {
             return `
                     <div class="btn-group" type_auto="group">
-                        <a href="{{ route('type_auto.index','')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ route('type_auto.index','')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">

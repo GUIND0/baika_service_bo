@@ -8,7 +8,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('location.create_or_update') }}" id="addRow" class="btn btn-outline-primary">
+                    <a href="{{ route('location.create_or_update') }}" id="addRow" class="btn btn-outline-success">
                         <i class="fa fa-plus"></i> Nouveau location
                     </a>
                 </div>
@@ -82,18 +82,6 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'nbre_portes',
-                    title: "Nombre de porte",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'nbre_sieges',
-                    title: "Nombre de siege",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
                     field: 'couleur_exterieure',
                     title: "Couleur Exterieure",
                     sortable: true,
@@ -130,7 +118,10 @@
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
-                        <a href="{{ route('location.create_or_update')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ route('location.show','') }}/${row.id}" class="btn btn-outline-info waves-effect" data-toggle="tooltip" title="Voir détails">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ route('location.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">

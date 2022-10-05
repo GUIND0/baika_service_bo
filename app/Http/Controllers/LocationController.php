@@ -120,11 +120,7 @@ class LocationController extends Controller
 
             }
         }
-    }
-
-
-
-
+        }
         if ($location->save()) {
 
             return redirect()->route('location.index')
@@ -132,6 +128,19 @@ class LocationController extends Controller
         }
 
         return back();
+    }
+
+    public function show($id){
+        $location = Location::select(
+            DB::raw("locations.*"),
+            DB::raw("type_locations.libelle as type_location")
+        )
+            ->join('type_locations', 'type_locations.id', 'locations.type_locations_id')
+            ->where('locations.id',$id)
+            ->first();
+        $images = Image::where('locations_id',$id)->get();
+
+        return view('pages.locations.show', compact('location','images'));
     }
 
     public function deleteImage($id)

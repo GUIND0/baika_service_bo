@@ -16,7 +16,7 @@
                             (<span class="text-danger">*</span>) Champs Obligatoires
                         </div>
                     </div>
-                    <div class="divider divider-primary">
+                    <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Generale</div>
                     </div>
                     <div class="mb-3 col-md-6">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div class="divider divider-primary">
+                    <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Interieure</div>
                     </div>
                     <div class="mb-3 col-md-3">
@@ -183,7 +183,7 @@
                         @endif
                     </div>
 
-                    <div class="divider divider-primary">
+                    <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Exterieure</div>
                     </div>
                     <div class="mb-3 col-md-3">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
 
-                    <div class="divider divider-primary">
+                    <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Moteur</div>
                     </div>
 
@@ -321,7 +321,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="divider divider-primary">
+                    <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Images</div>
                     </div>
                     @if ($location_images)
@@ -329,7 +329,7 @@
                         <div class="col" id="cl">
                             <div class="mb-3">
                                 <div id="inputFormRow">
-                                <label for="input-file-max-fs">Image {{ $key }}</label>
+                                <label for="input-file-max-fs">Image {{ $key+1 }}</label>
                                 <input type="file" id="input-file-max-fs" value="{{ $location_image->path}}" class="dropify" data-max-file-size="5M" data-default-file="{{ $location_image->path}}"  data-allowed-file-extensions="jpeg png jpg" readonly/>
                                 </div>
                             </div>
@@ -355,7 +355,7 @@
                     <div class="mb-2">
                         <div class="row">
                             <div class="col-md-5">
-                                <button id="addRow" type="button" class="btn btn-primary mt-1 pull-left"><i class="fa fa-plus"></i></button>
+                                <button id="addRow" type="button" class="btn btn-success mt-1 pull-left"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -365,7 +365,7 @@
             <div class="mb-3">
                 <div class="row d-flex justify-content-center">
                     <div class="demo-inline-spacing d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">
                             <i class="fa fa-save mr-1"></i> Enregistrer
                         </button>
                         <button type="reset" class="btn btn-danger">

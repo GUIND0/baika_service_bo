@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div class="card">
             <h5 class="card-header">Formulaire d'enregistrement.
-                <a href="{{ route('ticket.index') }}" class="btn btn-outline-primary pull-right">
+                <a href="{{ route('ticket.index') }}" class="btn btn-outline-success pull-right">
                     <i class="fa fa-arrow-left"></i> Retour
                 </a>
             </h5>
@@ -113,7 +113,7 @@
                 <div class="mb-3">
                     <div class="row d-flex justify-content-center">
                         <div class="demo-inline-spacing d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fa fa-save mr-1"></i> Enregistrer
                             </button>
                             <button type="reset" class="btn btn-danger">

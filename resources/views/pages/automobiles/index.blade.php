@@ -9,7 +9,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('automobile.create_or_update') }}" id="addRow" class="btn btn-outline-primary">
+                    <a href="{{ route('automobile.create_or_update') }}" id="addRow" class="btn btn-outline-success">
                         <i class="fa fa-plus"></i> Nouveau automobile
                     </a>
                 </div>
@@ -65,6 +65,13 @@
                     checkbox: true,
                 },
                 {
+                    field: 'image',
+                    title: "Apercu",
+                    sortable: true,
+                    filterControl: "input",
+                    formatter: imageFormatter,
+                },
+                {
                     field: 'caracteristique',
                     title: "Caracteristique",
                     sortable: true,
@@ -107,7 +114,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
-                        <a href="{{ route('automobile.create_or_update')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ route('automobile.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
@@ -123,14 +130,19 @@
             return '<span class="badge bg-danger">Loue</span>';
         }
 
+        function imageFormatter(value,row,index){
+            return `<img src="${value}" alt="..." class="img-thumbnail">`;
+        }
+
         function amountFormatter(value, row, index){
             return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
 
-         $('body').on('click', '.deleteBtn', function (e) {
+
+        $('body').on('click', '.deleteBtn', function (e) {
             e.preventDefault()
             var id = $(this).data("id");
-
+            var whichtr= $(this).closest("tr");
             Swal.fire({
                 title: 'Confirmation !',
                 text: "Voulez-vous vraiment supprimer cet élément ?",
@@ -139,8 +151,8 @@
                 confirmButtonText: 'Oui, supprimer!',
                 cancelButtonText: "Annuler",
                 customClass: {
-                confirmButton: 'btn btn-primary',
-                cancelButton: 'btn btn-outline-danger ml-1',
+                confirmButton: 'btn btn-primary m-2',
+                cancelButton: 'btn btn-outline-danger m-2',
                 closeOnConfirm: false
                 },
                 buttonsStyling: false
@@ -156,15 +168,19 @@
                         type: 'DELETE',
                         success: function(result) {
                             if(result == 'done'){
+                                whichtr.addClass("bg-danger");
+                                whichtr.fadeOut(2000, function(){
+                                    this.remove();
                                  Swal.fire({
                                     position: 'top',
                                     icon: 'success',
-                                    title: 'Suppression du automobile',
-                                    text: 'automobile supprimé avec succes !',
+                                    title: 'Suppression de l\'automobile',
+                                    text: 'Automobile supprimé avec succes !',
                                     showConfirmButton: false,
-                                    timer: 5000
+                                    timer: 1500
                                 });
-                                automobile.reload();
+                                //location.reload();
+                            });
                             }else{
                                 Swal.fire({
                                     icon: 'error',

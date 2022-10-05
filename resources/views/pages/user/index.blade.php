@@ -9,7 +9,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('user.create') }}" class="btn btn-outline-primary">
+                    <a href="{{ route('user.create') }}" class="btn btn-outline-success">
                         <i class="fa fa-plus"></i> Nouveau
                     </a>
                 </div>
@@ -135,10 +135,10 @@
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
-                        <a href="#" class="reset btn btn-outline-dark waves-effect" data-id="${value}" data-toggle="tooltip title="Réinitialiser">
+                        <a href="#" class="reset btn btn-outline-info waves-effect" data-id="${value}" data-toggle="tooltip title="Réinitialiser">
                             <i class="fa fa-key"></i>
                         </a>
-                        <a href="{{ url('user/create/')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ url('user/create/')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">

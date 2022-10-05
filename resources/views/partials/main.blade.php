@@ -155,7 +155,7 @@
             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
               <div class="mb-2 mb-md-0">
 
-                Developpé Par BAIKA SERVICE
+                Developpé Par BEKST
 
               </div>
               <div>
@@ -165,7 +165,7 @@
                 <div class="dropdown dropup footer-link me-3">
 
                 </div>
-                <a href="{{ route('deconnexion') }}" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Logout</a>
+                <a href="{{ route('deconnexion') }}" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Deconnexion</a>
               </div>
             </div>
           </footer>
