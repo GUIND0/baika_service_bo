@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Automobile;
+use App\Models\Image;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,5 +37,37 @@ class ApiController extends Controller
             ->first();
 
         return $automobiles->toJson();
+    }
+
+    public function locations(){
+        $locations = Location::select(
+            DB::raw("locations.*"),
+            DB::raw("type_locations.libelle as type_location")
+        )
+            ->join('type_locations', 'type_locations.id', 'locations.type_locations_id')
+            ->get();
+
+
+        return $locations->toJson();
+    }
+
+
+    public function location_images($id){
+        $images = Image::where('locations_id',$id)->get();
+
+        return $images->toJson();
+    }
+
+
+    public function location($id){
+        $location = Location::select(
+            DB::raw("locations.*"),
+            DB::raw("type_locations.libelle as type_location")
+        )
+            ->join('type_locations', 'type_locations.id', 'locations.type_locations_id')
+            ->where('locations.id',$id)
+            ->first();
+
+            return $location->toJson();
     }
 }

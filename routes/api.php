@@ -18,6 +18,14 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
 
 });
 
-
+// All automobile
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
+// Single automobile
 Route::get('/automobile/{automobile_id}', [ApiController::class, 'automobile']);
+
+//all location
+Route::get('/locations', [ApiController::class, 'locations']);
+//Single location
+Route::get('/location/{location_id}', [ApiController::class, 'location']);
+//loaction Image
+Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
