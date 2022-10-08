@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>{{ config('app.name') }} - Page de connexion</title>
+    <title> BEKST - Page de connexion</title>
 
     <meta name="description" content="" />
 
@@ -86,7 +86,7 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4>BienvenueBEKST</h4>
+              <h4>Bienvenue sur <strong>BEKST</strong> </h4>
               <p>Veuillez-vous connecter.</p>
               @if(isset($message))
                 <div class="alert alert-success mt-1 alert-validation-msg" role="alert">

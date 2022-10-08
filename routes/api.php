@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
 // Single automobile
 Route::get('/automobile/{automobile_id}', [ApiController::class, 'automobile']);
+//Tickect
+Route::get('/tickets', [ApiController::class, 'tickets']);
 
 //all location
 Route::get('/locations', [ApiController::class, 'locations']);
@@ -29,3 +31,4 @@ Route::get('/locations', [ApiController::class, 'locations']);
 Route::get('/location/{location_id}', [ApiController::class, 'location']);
 //loaction Image
 Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
+
