@@ -53,7 +53,7 @@
 
               </div>
             </div>
-            <div class="divider divider-primary">
+            <div class="divider divider-dark">
                 <div class="divider-text" style="font-size: 28px;">Changer de mot de passe</div>
             </div>
             <form action="{{route('user.password')}}" method='POST' role="form" id="form" class="form-horizontal" enctype="multipart/form-data">

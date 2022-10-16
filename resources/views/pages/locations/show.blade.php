@@ -249,7 +249,7 @@
           <div class="carousel-inner">
               @foreach ($images as $key =>  $img )
               <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                  <img class="img-fluid img-thumbnail" alt="Responsive image" src="{{ $img->path }}" >
+                  <img style="width: auto; height: 300px;" class="img-fluid img-thumbnail" alt="Responsive image" src="{{ $img->path }}" >
               </div>
               @endforeach
           </div>

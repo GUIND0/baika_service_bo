@@ -14,6 +14,8 @@ use App\Http\Controllers\TypeLocationController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\AutomobileController;
+use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +92,11 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::post('/type_auto/store', [ TypeAutoController::class, 'store'])->name('type_auto.store');
     Route::delete('/type_auto/delete/{id}', [ TypeAutoController::class, 'delete'])->name('type_auto.delete');
 
+     // Type Permi
+     Route::get('/categorie_permi/{categorie_permi_id?}', [ CategoriePermiController::class, 'index'])->name('categorie_permi.index');
+     Route::post('/categorie_permi/store', [ CategoriePermiController::class, 'store'])->name('categorie_permi.store');
+     Route::delete('/categorie_permi/delete/{id}', [ CategoriePermiController::class, 'delete'])->name('categorie_permi.delete');
+
     // Type Location
     Route::get('/type_location/{type_location_id?}', [ TypeLocationController::class, 'index'])->name('type_location.index');
     Route::post('/type_location/store', [ TypeLocationController::class, 'store'])->name('type_location.store');
@@ -110,9 +117,21 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/location/deleteImage/{id}', [LocationController::class, 'deleteImage'])->name('location.deleteImage');
 
 
-    // Location
+    // Automobile
     Route::get('automobiles', [AutomobileController::class, 'index'])->name('automobile.index');
     Route::get('/automobile/{id?}', [AutomobileController::class, 'create_or_update'])->name('automobile.create_or_update');
     Route::post('automobile/store', [AutomobileController::class, 'store'])->name('automobile.store');
     Route::delete('automobile/delete/{id}', [AutomobileController::class, 'delete'])->name('automobile.delete');
+
+    // Chauffeur
+    Route::get('chauffeurs', [ChauffeurController::class, 'index'])->name('chauffeur.index');
+    Route::get('/chauffeur/{id?}', [ChauffeurController::class, 'create_or_update'])->name('chauffeur.create_or_update');
+    Route::post('chauffeur/store', [ChauffeurController::class, 'store'])->name('chauffeur.store');
+    Route::delete('chauffeur/delete/{id}', [ChauffeurController::class, 'delete'])->name('chauffeur.delete');
+
+    // Evenement
+    Route::get('evenements', [EvenementController::class, 'index'])->name('evenement.index');
+    Route::get('/evenement/{id?}', [EvenementController::class, 'create_or_update'])->name('evenement.create_or_update');
+    Route::post('evenement/store', [EvenementController::class, 'store'])->name('evenement.store');
+    Route::delete('evenement/delete/{id}', [EvenementController::class, 'delete'])->name('evenement.delete');
 });

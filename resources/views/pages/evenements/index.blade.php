@@ -1,52 +1,15 @@
-
 @extends('partials.main')
-@section('title1')Trajets
-@endsection
-@section('style')
-<style>
-
-</style>
+@section('title1')Liste des evenements
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <form action="{{route('categorie_permi.store')}}" method='POST' trajet="form" id="form" class="form-horizontal" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="categorie_permi_id" value="{{$categorie_permi->id ?? '' }}"/>
-
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="libelle" class="form-label">Libelle</label>
-                        <input type="text"name ="libelle" class="form-control {{ $errors->has('libelle') ? 'is-invalid' : ''}}" id="libelle" placeholder="Veuillez saisir le libelle..."  value="{{ $categorie_permi != null ? $categorie_permi->libelle : old('libelle') }}" required>
-                        @if($errors->has('libelle'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('libelle') }}</li>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="row d-flex justify-content-center">
-                        <div class="demo-inline-spacing d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-save mr-1"></i> Enregistrer
-                            </button>
-                            <button type="reset" class="btn btn-danger">
-                                <i class="fa fa-times mr-1"></i>  Annuler
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-8">
+    {{-- liste --}}
+    <div class="col-md-12">
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('categorie_permi.index') }}"  class="btn btn-outline-primary">
-                        <i class="fa fa-plus"></i> Nouveau
+                    <a href="{{ route('evenement.create_or_update') }}" id="addRow" class="btn btn-outline-success">
+                        <i class="fa fa-plus"></i> Nouveau Evenement
                     </a>
                 </div>
                 <div class="table-responsive table-scrollable">
@@ -58,20 +21,22 @@
             </div>
         </div>
     </div>
+    {{-- end liste --}}
 </div>
 @endsection
+@section('script')
 
-@section("script")
 <script>
-    $('#table-javascript').bootstrapTable({
-           data: @json($categorie_permis),
+
+        $('#table-javascript').bootstrapTable({
+            data: @json($evenements),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
             pagination: true,
             pageSize: 10,
             pageList: [10, 25, 50, 100, 200],
-            sortOrder: "desc",
+            sortOrder: "asc",
             sortName: "libelle",
             locale: "fr-FR",
             search: true,
@@ -93,35 +58,93 @@
             filterControl: true,
             fixedNumber: 8,
             fixedRightNumber: 10,
-            sidePagination: 'server',
             columns: [
                 {
                     title: 'state',
                     checkbox: true,
                 },
                 {
-                    field: 'libelle',
-                    title: "Libellé",
+                    field: 'image',
+                    title: "Apercu",
+                    sortable: true,
+                    filterControl: "input",
+                    formatter: imageFormatter,
+                },
+                {
+                    field: 'description',
+                    title: "Description",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                 {
+                    field: 'lieu',
+                    title: "Lieu",
                     sortable: true,
                     filterControl: "input",
                 },
                 {
+                    field: 'date',
+                    title: "Date",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'heure',
+                    title: "Heure",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'ticket_restant',
+                    title: "Ticket Restant",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'prix',
+                    title: "Prix (XOF)",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'statut',
+                    title: "Statut",
+                    sortable: true,
+                    filterControl: "input",
+                    align : "center",
+                    formatter: actifFormatter,
+                },
+                 {
                     field: 'id',
                     title: "Actions",
                     align: "center",
                     formatter: actionsFormatter,
                     width : "200"
                 }
+
             ]
 
         });
+        function actifFormatter(value, row, index){
+            if(value == 1){
+              return '<span class="badge bg-success">Activer</span>';
+            }
+            return '<span class="badge bg-danger">Desactiver</span>';
+        }
 
+        function imageFormatter(value,row,index){
+            return `<img src="${value}" alt="..." class="img-thumbnail">`;
+        }
 
-
+        function amountFormatter(value, row, index){
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
         function actionsFormatter(value, row, index) {
-            return `
-                    <div class="btn-group" trajet="group">
-                        <a href="{{ route('categorie_permi.index','')}}/${value}" class="btn btn-outline-primary waves-effect" data-toggle="tooltip" title="Modifier">
+            return `<form action="{{ route('evenement.delete', '')}}/${value}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('evenement.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
@@ -130,10 +153,14 @@
                     </div>`;
         }
 
-        $('body').on('click', '.deleteBtn', function (e) {
+        function amountFormatter(value, row, index){
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+         $('body').on('click', '.deleteBtn', function (e) {
             e.preventDefault()
             var id = $(this).data("id");
-            var whichtr= $(this).closest("tr");
+
             Swal.fire({
                 title: 'Confirmation !',
                 text: "Voulez-vous vraiment supprimer cet élément ?",
@@ -142,8 +169,8 @@
                 confirmButtonText: 'Oui, supprimer!',
                 cancelButtonText: "Annuler",
                 customClass: {
-                confirmButton: 'btn btn-primary m-2',
-                cancelButton: 'btn btn-outline-danger m-2',
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-outline-danger ml-1',
                 closeOnConfirm: false
                 },
                 buttonsStyling: false
@@ -155,23 +182,19 @@
                         }
                     });
                     $.ajax({
-                        url: "{{route('categorie_permi.delete','')}}/"+id,
+                        url: "{{route('evenement.delete','')}}/"+id,
                         type: 'DELETE',
                         success: function(result) {
                             if(result == 'done'){
-                                whichtr.addClass("bg-danger");
-                                whichtr.fadeOut(2000, function(){
-                                    this.remove();
                                  Swal.fire({
                                     position: 'top',
                                     icon: 'success',
-                                    title: 'Suppression du categorie de permis',
-                                    text: 'Categorie permis supprimé avec succes !',
+                                    title: 'Suppression du evenement',
+                                    text: 'evenement supprimé avec succes !',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 5000
                                 });
-                                //location.reload();
-                            });
+                                location.reload();
                             }else{
                                 Swal.fire({
                                     icon: 'error',
@@ -194,8 +217,7 @@
             });
 
         });
-</script>
-<script type="text/javascript">
 
 </script>
+
 @endsection

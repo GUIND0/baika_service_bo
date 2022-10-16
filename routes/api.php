@@ -24,6 +24,11 @@ Route::get('/automobiles', [ApiController::class, 'automobiles']);
 Route::get('/automobile/{automobile_id}', [ApiController::class, 'automobile']);
 //Tickect
 Route::get('/tickets', [ApiController::class, 'tickets']);
+//Evenement
+Route::get('/evenements', [ApiController::class, 'evenements']);
+
+//Chauffeur
+Route::get('/chauffeurs', [ApiController::class, 'chauffeurs']);
 
 //all location
 Route::get('/locations', [ApiController::class, 'locations']);

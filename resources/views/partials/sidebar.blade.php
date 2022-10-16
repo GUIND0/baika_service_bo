@@ -96,15 +96,44 @@
                 </li>
             </ul>
         </li>
-
-        <li class="menu-item {{ (request()->routeIs('actualite.list') || request()->routeIs('actualite.create_or_update')) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ (request()->routeIs('chauffeur.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon fa fa-users text-dark" style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Chauffeur</div>
             </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('chauffeur.index')) ? 'active' : '' }}">
+                    <a href="{{ route('chauffeur.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('chauffeur.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('chauffeur.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ (request()->routeIs('evenement.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-id-card text-dark"  style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Evenements</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('evenement.index')) ? 'active' : '' }}">
+                    <a href="{{ route('evenement.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('evenement.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('evenement.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
-        <li class="menu-item {{ (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
+        <li class="menu-item {{ (request()->routeIs('categorie_permi.index')) || (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icon fa fa-list text-dark" style="font-size:20px;"></i>
@@ -130,6 +159,11 @@
                 <li class="menu-item {{ (request()->routeIs('type_auto.index')) ? 'active' : '' }}">
                     <a href="{{ route('type_auto.index') }}" class="menu-link">
                         <div data-i18n="Text Divider">Type Auto</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('categorie_permi.index')) ? 'active' : '' }}">
+                    <a href="{{ route('categorie_permi.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Categorie Permi</div>
                     </a>
                 </li>
             </ul>

@@ -24,6 +24,7 @@ class CategoriePermiController extends Controller
     }
 
     public function store(Request $request){
+
         $id = request('categorie_permi_id');
 
         if ($id != '') {

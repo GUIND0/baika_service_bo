@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Automobile;
+use App\Models\Chauffeur;
+use App\Models\Evenement;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Ticket;
@@ -70,6 +72,37 @@ class ApiController extends Controller
             ->get();
 
         return $tickets->toJson();
+    }
+
+    public function chauffeurs(Request $request){
+        $chauffeurs = Chauffeur::select(
+            DB::raw("chauffeurs.*"),
+            DB::raw("categorie_permis.libelle as categorie_permi"),
+            DB::raw("cvs.path as cv"),
+            DB::raw("images.path as image")
+            )
+            ->join('categorie_permis', 'categorie_permis.id', 'chauffeurs.categorie_permis_id')
+            ->leftJoin('cvs', 'cvs.chauffeurs_id', 'chauffeurs.id')
+            ->leftJoin('images', 'images.chauffeurs_id', 'chauffeurs.id')
+            ->where('chauffeurs.statut',1)
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return $chauffeurs->toJson();
+    }
+
+    public function evenements(Request $request){
+        $evenements = Evenement::select(
+            DB::raw("evenements.*"),
+            DB::raw("images.path as image"),
+
+            )
+            ->join('images', 'images.evenements_id', 'evenements.id')
+            ->where('evenements.statut',1)
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return $evenements->toJson();
     }
 
     /**
