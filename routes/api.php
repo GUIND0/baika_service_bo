@@ -37,3 +37,10 @@ Route::get('/location/{location_id}', [ApiController::class, 'location']);
 //loaction Image
 Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
 
+//all tourisme
+Route::get('/tourismes', [ApiController::class, 'tourismes']);
+//Single tourisme
+Route::get('/tourisme/{tourisme_id}', [ApiController::class, 'tourisme']);
+//loaction Image
+Route::get('/tourisme/{tourisme_id}/images', [ApiController::class, 'tourisme_images']);
+

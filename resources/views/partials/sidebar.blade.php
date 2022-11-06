@@ -132,7 +132,24 @@
                 </li>
             </ul>
         </li>
-
+        <li class="menu-item {{ (request()->routeIs('tourisme.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-car text-dark" style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Tourisme</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('tourisme.index')) ? 'active' : '' }}">
+                    <a href="{{ route('tourisme.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Liste</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('tourisme.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('tourisme.create_or_update') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item {{ (request()->routeIs('categorie_permi.index')) || (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">

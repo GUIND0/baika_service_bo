@@ -16,6 +16,7 @@ use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\AutomobileController;
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\TourismeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,14 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::post('location/store', [LocationController::class, 'store'])->name('location.store');
     Route::delete('location/delete/{id}', [LocationController::class, 'delete'])->name('location.delete');
     Route::get('/location/deleteImage/{id}', [LocationController::class, 'deleteImage'])->name('location.deleteImage');
+
+    // Tourisme
+    Route::get('tourismes', [TourismeController::class, 'index'])->name('tourisme.index');
+    Route::get('/tourisme/show/{id}', [TourismeController::class, 'show'])->name('tourisme.show');
+    Route::get('/tourisme/{id?}', [TourismeController::class, 'create_or_update'])->name('tourisme.create_or_update');
+    Route::post('tourisme/store', [TourismeController::class, 'store'])->name('tourisme.store');
+    Route::delete('tourisme/delete/{id}', [TourismeController::class, 'delete'])->name('tourisme.delete');
+    Route::get('/tourisme/deleteImage/{id}', [TourismeController::class, 'deleteImage'])->name('tourisme.deleteImage');
 
 
     // Automobile

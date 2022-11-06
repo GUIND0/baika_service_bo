@@ -6,11 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-
-class Ticket extends Model
+class Tourisme extends Model
 {
-
-
     use HasFactory;
 
     use HasFactory;

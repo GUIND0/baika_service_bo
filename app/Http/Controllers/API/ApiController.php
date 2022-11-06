@@ -9,6 +9,7 @@ use App\Models\Evenement;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Ticket;
+use App\Models\Tourisme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
@@ -219,6 +220,12 @@ class ApiController extends Controller
         return $images->toJson();
     }
 
+    public function tourisme_images($id){
+        $images = Image::where('tourismes_id',$id)->get();
+
+        return $images->toJson();
+    }
+
 
 
 
@@ -285,6 +292,19 @@ class ApiController extends Controller
 
 
 
+
+    public function tourisme($id){
+        $tourisme = Tourisme::select(
+            DB::raw("tourismes.*"),
+        )
+            ->where('tourismes.id',$id)
+            ->first();
+
+            return $tourisme->toJson();
+    }
+
+
+
 /**
      * @OA\Get(
      *      path="/api/locations",
@@ -328,6 +348,16 @@ class ApiController extends Controller
 
 
         return $locations->toJson();
+    }
+
+    public function tourismes(){
+        $tourismes = tourisme::select(
+            DB::raw("tourismes.*"),
+        )
+            ->get();
+
+
+        return $tourismes->toJson();
     }
 
 
