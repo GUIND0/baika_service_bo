@@ -286,8 +286,14 @@ class ApiController extends Controller
             ->join('type_locations', 'type_locations.id', 'locations.type_locations_id')
             ->where('locations.id',$id)
             ->first();
+        $images = Image::where('locations_id',$location->id)->get();
+        $ArrayImage =[];
+        foreach ( $images  as $key =>  $image) {
+            array_push($ArrayImage, $image->path);
+        }
+        $location->images = $ArrayImage;
 
-            return $location->toJson();
+        return $location->toJson();
     }
 
 
@@ -299,8 +305,14 @@ class ApiController extends Controller
         )
             ->where('tourismes.id',$id)
             ->first();
+        $images = Image::where('tourismes_id',$tourisme->id)->get();
+        $ArrayImage =[];
+        foreach ( $images  as $key =>  $image) {
+            array_push($ArrayImage, $image->path);
+        }
+        $tourisme->images = $ArrayImage;
 
-            return $tourisme->toJson();
+        return $tourisme->toJson();
     }
 
 
@@ -344,8 +356,14 @@ class ApiController extends Controller
             DB::raw("type_locations.libelle as type_location")
         )
             ->join('type_locations', 'type_locations.id', 'locations.type_locations_id')
+            ->where('statut',1)
             ->get();
 
+        $locations->map(function ($item) {
+            $image = Image::where('locations_id',$item->id)->first();
+            $item->image = $image->path;
+            return $item;
+            });
 
         return $locations->toJson();
     }
@@ -354,7 +372,14 @@ class ApiController extends Controller
         $tourismes = tourisme::select(
             DB::raw("tourismes.*"),
         )
-            ->get();
+        ->where('statut',1)
+        ->get();
+
+        $tourismes->map(function ($item) {
+            $image = Image::where('tourismes_id',$item->id)->first();
+            $item->image = $image->path;
+            return $item;
+        });
 
 
         return $tourismes->toJson();
