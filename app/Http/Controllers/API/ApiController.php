@@ -111,8 +111,11 @@ class ApiController extends Controller
         $quartiers = Quartier::select(
             DB::raw("quartiers.id as id"),
             DB::raw("quartiers.libelle as libelle"),
-            )
-            ->orderBy('created_at','DESC')
+        );
+         if(request('libelle') != null ){
+                $quartiers =  $quartiers->where('quartiers.libelle', 'like', '%' . request('libelle'). '%');
+            }
+            $quartiers =  $quartiers->orderBy('created_at','DESC')
             ->get();
 
         return $quartiers->toJson();
