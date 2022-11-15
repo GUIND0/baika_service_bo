@@ -17,6 +17,7 @@ use App\Http\Controllers\AutomobileController;
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\TourismeController;
+use App\Http\Controllers\TypeColiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,11 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/type_auto/{type_auto_id?}', [ TypeAutoController::class, 'index'])->name('type_auto.index');
     Route::post('/type_auto/store', [ TypeAutoController::class, 'store'])->name('type_auto.store');
     Route::delete('/type_auto/delete/{id}', [ TypeAutoController::class, 'delete'])->name('type_auto.delete');
+
+    // Type Coli
+    Route::get('/type_coli/{type_coli_id?}', [ TypeColiController::class, 'index'])->name('type_coli.index');
+    Route::post('/type_coli/store', [ TypeColiController::class, 'store'])->name('type_coli.store');
+    Route::delete('/type_coli/delete/{id}', [ TypeColiController::class, 'delete'])->name('type_coli.delete');
 
      // Type Permi
      Route::get('/categorie_permi/{categorie_permi_id?}', [ CategoriePermiController::class, 'index'])->name('categorie_permi.index');

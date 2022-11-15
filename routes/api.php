@@ -46,4 +46,8 @@ Route::get('/tourisme/{tourisme_id}/images', [ApiController::class, 'tourisme_im
 
 Route::get('/quartiers', [ApiController::class, 'quartiers']);
 
+Route::get('/type_colis', [ApiController::class, 'type_colis']);
+
+
+Route::post('/create_demande_colis', [ApiController::class, 'create_demande_colis']);
 

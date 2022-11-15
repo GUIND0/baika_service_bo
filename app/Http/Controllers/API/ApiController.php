@@ -5,12 +5,14 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Automobile;
 use App\Models\Chauffeur;
+use App\Models\DemandeColi;
 use App\Models\Evenement;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\Quartier;
 use App\Models\Ticket;
 use App\Models\Tourisme;
+use App\Models\TypeColi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
@@ -119,6 +121,16 @@ class ApiController extends Controller
             ->get();
 
         return $quartiers->toJson();
+    }
+
+    public function type_colis(Request $request){
+        $type_colis = TypeColi::select(
+            DB::raw("type_colis.id as id"),
+            DB::raw("type_colis.libelle as libelle"),
+        )    ->orderBy('created_at','DESC')
+            ->get();
+
+        return $type_colis->toJson();
     }
 
     /**
@@ -400,7 +412,57 @@ class ApiController extends Controller
         return $tourismes->toJson();
     }
 
+    public function create_demande_colis(Request $request){
 
+
+        //Variable
+        $nom                = $request->nom ;
+        $prenom             = $request->prenom ;
+        $telephone          = $request->telephone ;
+        $depart             = $request->depart ;
+        $arrive             = $request->arrive ;
+        $type_coli          = $request->type_coli ;
+        $poids              = $request->poids ;
+        $valeur             = $request->valeur ;
+
+        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
+        if($nom == null){
+            return response(["error"=>"Le nom doit etre renseigné"],400);
+        }
+        if($prenom == null){
+            return response(["error"=>"Le prénom doit etre renseigné"],400);
+        }
+        if($telephone == null){
+            return response(["error"=>"Le telephone doit etre renseigné"],400);
+        }
+        if($depart == null){
+            return response(["error"=>"Le depart doit etre renseigné"],400);
+        }
+        if($arrive == null){
+            return response(["error"=>"L'arrive doit etre renseigné"],400);
+        }
+        if($type_coli == null){
+            return response(["error"=>"Le type_coli doit etre renseigné"],400);
+        }
+
+        $demande  = new DemandeColi();
+
+        $demande->nom = $nom;
+        $demande->prenom = $prenom;
+        $demande->telephone = $telephone;
+        $demande->departs_id = $depart;
+        $demande->arrives_id = $arrive;
+        $demande->type_colis_id = $type_coli;
+        $demande->etat = 'encours';
+        $demande->poids = $poids;
+        $demande->valeur = $valeur;
+
+        if( $demande->save()){
+            return response(["success"=>" La demande est crée avec succes"],200);
+        }else {
+            return response(["error"=>" Le dossier n'as pas pu etre crée"],400);
+        }
+    }
 
 
 

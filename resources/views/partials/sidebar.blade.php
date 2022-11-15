@@ -150,7 +150,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ (request()->routeIs('categorie_permi.index')) || (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
+        <li class="menu-item {{ (request()->routeIs('type_coli.index')) || (request()->routeIs('categorie_permi.index')) || (request()->routeIs('compagnie.index')) || (request()->routeIs('trajet.index')) || (request()->routeIs('type_location.index')) || (request()->routeIs('type_auto.index')) ||  (request()->routeIs('info_meteo.list')) || (request()->routeIs('servicetype.*')) || (request()->routeIs('info_meteo.create_or_update')) || (request()->routeIs('temperature.index')) || (request()->routeIs('localite.*'))  ? 'active open' : '' }}">
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icon fa fa-list text-dark" style="font-size:20px;"></i>
@@ -176,6 +176,11 @@
                 <li class="menu-item {{ (request()->routeIs('type_auto.index')) ? 'active' : '' }}">
                     <a href="{{ route('type_auto.index') }}" class="menu-link">
                         <div data-i18n="Text Divider">Type Auto</div>
+                    </a>
+                </li>
+                  <li class="menu-item {{ (request()->routeIs('type_coli.index')) ? 'active' : '' }}">
+                    <a href="{{ route('type_coli.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Type Coli</div>
                     </a>
                 </li>
                 <li class="menu-item {{ (request()->routeIs('categorie_permi.index')) ? 'active' : '' }}">
