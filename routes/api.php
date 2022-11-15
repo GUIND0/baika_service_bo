@@ -44,3 +44,6 @@ Route::get('/tourisme/{tourisme_id}', [ApiController::class, 'tourisme']);
 //loaction Image
 Route::get('/tourisme/{tourisme_id}/images', [ApiController::class, 'tourisme_images']);
 
+Route::get('/quartiers', [ApiController::class, 'quartiers']);
+
+

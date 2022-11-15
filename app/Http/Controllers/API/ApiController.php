@@ -8,6 +8,7 @@ use App\Models\Chauffeur;
 use App\Models\Evenement;
 use App\Models\Image;
 use App\Models\Location;
+use App\Models\Quartier;
 use App\Models\Ticket;
 use App\Models\Tourisme;
 use Illuminate\Http\Request;
@@ -104,6 +105,17 @@ class ApiController extends Controller
             ->get();
 
         return $evenements->toJson();
+    }
+
+    public function quartiers(Request $request){
+        $quartiers = Quartier::select(
+            DB::raw("quartiers.id as id"),
+            DB::raw("quartiers.libelle as libelle"),
+            )
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return $quartiers->toJson();
     }
 
     /**
