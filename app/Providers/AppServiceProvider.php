@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\DemandeColi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->composer('partials.sidebar', function ($view)
+        {
+            $demande_traite = DemandeColi::where('etat','traite')->get()->count();
+            $demande_encours = DemandeColi::where('etat','encours')->get()->count();
+
+            $view->with('demande_traite',$demande_traite);
+            $view->with('demande_encours',$demande_encours);
+        });
+
         DB::listen(function($query) {
             $sql = $query->sql;
             // print($sql . "-//-");

@@ -15,6 +15,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\AutomobileController;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\DemandeColiController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\TourismeController;
 use App\Http\Controllers\TypeColiController;
@@ -149,4 +150,9 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/evenement/{id?}', [EvenementController::class, 'create_or_update'])->name('evenement.create_or_update');
     Route::post('evenement/store', [EvenementController::class, 'store'])->name('evenement.store');
     Route::delete('evenement/delete/{id}', [EvenementController::class, 'delete'])->name('evenement.delete');
+
+    // Demande Coli
+    Route::get('colis_livraison_traite', [DemandeColiController::class, 'traite'])->name('colis_livraison_traite.index');
+    Route::get('colis_livraison_encours', [DemandeColiController::class, 'encours'])->name('colis_livraison_encours.index');
+    Route::get('demande_change_etat/{id}', [DemandeColiController::class, 'demande_change_etat'])->name('demande_change_etat');
 });

@@ -21,7 +21,7 @@
         <li class="menu-item {{ (request()->routeIs('dashboard.index')) ? 'active' : '' }}">
             <a href="{{ route('dashboard.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons fa fa-tachometer text-dark"></i>
-                <div data-i18n="Analytics">Tableau de bord</div>
+                <div data-i18n="Analytics">Tableau de bord </div>
             </a>
         </li>
         <li class="menu-item {{ (request()->routeIs('ticket.*')) ? 'active open' : '' }}">
@@ -38,6 +38,24 @@
                 <li class="menu-item {{ (request()->routeIs('ticket.create_or_update')) ? 'active' : '' }}">
                     <a href="{{ route('ticket.create_or_update') }}" class="menu-link">
                         <div data-i18n="Text Divider">Nouveau</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ (request()->routeIs('colis_livraison_encours.*')) || (request()->routeIs('colis_livraison_traite.*')) ? 'active open' : '' }}">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon fa fa-cube text-dark"  style="font-size:20px;"></i>
+                <div data-i18n="Analytics">Colis Livraison <span class="badge badge-center rounded-pill bg-danger">{{ $demande_encours }}</span></div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (request()->routeIs('colis_livraison_encours.index')) ? 'active' : '' }}">
+                    <a href="{{ route('colis_livraison_encours.index') }}" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Non traite <span class="badge badge-center rounded-pill bg-danger">{{ $demande_encours }}</span></div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('colis_livraison_traite.index')) ? 'active' : '' }}">
+                    <a href="{{ route('colis_livraison_traite.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Traite <span class="badge badge-center rounded-pill bg-success">{{ $demande_traite }}</span></div>
                     </a>
                 </li>
             </ul>
@@ -116,7 +134,7 @@
         </li>
         <li class="menu-item {{ (request()->routeIs('evenement.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa fa-id-card text-dark"  style="font-size:20px;"></i>
+                <i class="menu-icon fa fa-id-card-o text-dark"  style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Evenements</div>
             </a>
             <ul class="menu-sub">

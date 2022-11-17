@@ -69,4 +69,11 @@ class Controller extends BaseController
         return false;
 
     }
+
+    public function test()
+    {
+        $a = 12;
+
+        return view('partials.sidebar', compact('a'));
+    }
 }
