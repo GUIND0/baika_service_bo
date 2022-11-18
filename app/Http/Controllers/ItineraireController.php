@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chauffeur;
 use Illuminate\Http\Request;
 use App\Models\Itineraire;
 use App\Models\Quartier;
@@ -18,7 +19,11 @@ class ItineraireController extends Controller
             $itineraire = Itineraire::findOrFail($itineraire_id);
         }
         $itineraires = Itineraire::select(
-            DB::raw('itineraires.*'))
+            DB::raw('itineraires.*'),
+            DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
+            DB::raw("chauffeurs.telephone as telephone"),
+            )
+            ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
             ->orderByDesc('itineraires.created_at')
             ->get();
 
@@ -28,9 +33,9 @@ class ItineraireController extends Controller
 
             return $item;
         });
-
+        $chauffeurs = Chauffeur::all();
         $quartiers = Quartier::all();
-        return view('pages.itineraires.index', compact('quartiers','itineraire','itineraires'));
+        return view('pages.itineraires.index', compact('chauffeurs','quartiers','itineraire','itineraires'));
     }
 
     public function store(Request $request){
@@ -45,12 +50,16 @@ class ItineraireController extends Controller
         request()->validate([
             'depart' => 'required',
             'arrive' => 'required',
-            'prix' => 'required',
+            'prix_min' => 'required',
+            'prix_max' => 'required',
+            'chauffeur' => 'required',
         ]);
 
         $itineraire->quartiers_id = request('depart');
         $itineraire->quartiers_id1 = request('arrive');
-        $itineraire->prix = str_replace(' ', '',  request('prix'));
+        $itineraire->prix_min = str_replace(' ', '',  request('prix_min'));
+        $itineraire->prix_max = str_replace(' ', '',  request('prix_max'));
+        $itineraire->chauffeurs_id = request('chauffeur');
 
         if($itineraire->save()){
             flash()->success('Succès  !', 'Itineraire enregistré avec succès');

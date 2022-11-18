@@ -84,6 +84,12 @@
                     filterControl: "input",
                 },
                 {
+                    field: 'telephone',
+                    title: "Telephone",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
                     field: 'categorie_permi',
                     title: "Categorie Permi",
                     sortable: true,

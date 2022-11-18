@@ -59,6 +59,7 @@ class ChauffeurController extends Controller
                 'categorie_permi' => ['required'],
                 'image' => ['required'],
                 'cv' => ['required'],
+                'telephone' => ['required'],
 
             ]);
             $chauffeur = Chauffeur::findOrFail($id);
@@ -71,6 +72,8 @@ class ChauffeurController extends Controller
                 'categorie_permi' => ['required'],
                 'image' => ['required'],
                 'cv' => ['required'],
+                'telephone' => ['required'],
+
 
             ]);
             $chauffeur = new chauffeur();
@@ -81,6 +84,7 @@ class ChauffeurController extends Controller
         $chauffeur->prenom = request('prenom');
         $chauffeur->categorie_permis_id = request('categorie_permi');
         $chauffeur->statut = request('statut');
+        $chauffeur->telephone = request('telephone');
 
 
 

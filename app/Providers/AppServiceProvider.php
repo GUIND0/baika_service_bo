@@ -30,9 +30,11 @@ class AppServiceProvider extends ServiceProvider
         {
             $demande_traite = DemandeColi::where('etat','traite')->get()->count();
             $demande_encours = DemandeColi::where('etat','encours')->get()->count();
+            $demande_rejete = DemandeColi::where('etat','rejete')->get()->count();
 
             $view->with('demande_traite',$demande_traite);
             $view->with('demande_encours',$demande_encours);
+            $view->with('demande_rejete',$demande_rejete);
         });
 
         DB::listen(function($query) {

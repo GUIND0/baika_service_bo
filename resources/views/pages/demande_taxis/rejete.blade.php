@@ -1,6 +1,6 @@
 
 @extends('partials.main')
-@section('title1')Colis Livraison Encours
+@section('title1')Colis Livraison Rejete
 @endsection
 @section('style')
 <style>
@@ -12,6 +12,7 @@
     <div class="col-md-12">
         <div class="card card-box">
             <div class="card-body">
+
                 <div class="table-responsive table-scrollable">
                     <table class="table table-bordered table-hover" id="table-javascript">
                         <thead class="thead-light"></thead>
@@ -27,7 +28,7 @@
 @section("script")
 <script>
     $('#table-javascript').bootstrapTable({
-           data: @json($colis_livraison_encours),
+           data: @json($colis_livraison_rejete),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -111,12 +112,18 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'id',
-                    title: "Actions",
-                    align: "center",
-                    formatter: actionsFormatter,
-                    width : "200"
-                }
+                    field: 'user',
+                    title: "Rejete par",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                // {
+                //     field: 'id',
+                //     title: "Actions",
+                //     align: "center",
+                //     formatter: actionsFormatter,
+                //     width : "200"
+                // }
             ]
 
         });
@@ -125,24 +132,22 @@
         function actionsFormatter(value, row, index) {
             return `
                     <div class="btn-group" quartier="group">
-                        <a href="" class="etatTraite btn btn-outline-success waves-effect" data-id="${value}" data-toggle="tooltip" title="Traiter">
-                            Traiter
-                        </a>
-                        <a href="" data-id="${value}" class="etatRejete btn btn-outline-danger waves-effect" data-toggle="tooltip" title="Rejeter">
-                            Rejeter
+                        <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
+                            <i class="fa fa-trash"></i>
                         </a>
                     </div>`;
         }
 
-        $('body').on('click', '.etatTraite', function(e){
-            e.preventDefault();
-            var id = $(this).data('id');
+        $('body').on('click', '.deleteBtn', function (e) {
+            e.preventDefault()
+            var id = $(this).data("id");
+            var whichtr= $(this).closest("tr");
             Swal.fire({
                 title: 'Confirmation !',
-                text: "Voulez-vous vraiment changer l'etat a traite ?",
+                text: "Voulez-vous vraiment supprimer cet élément ?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Oui, mettre a jour!',
+                confirmButtonText: 'Oui, supprimer!',
                 cancelButtonText: "Annuler",
                 customClass: {
                 confirmButton: 'btn btn-primary m-2',
@@ -151,61 +156,51 @@
                 },
                 buttonsStyling: false
             }).then(function (result) {
-                  if (result.value) {
-
+                if (result.value) {
                     $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                    });
-                    $.ajax({
-                        url: `{{ route('demande_change_etat','')}}/${id}?etat=traite`,
-                        method: 'get',
-                        cache: false,
-
-                        success:function(result){
-                            if(result=="ok"){
-                               window.location.href = "{{ route('colis_livraison_encours.index')}}";
-                            }
+                        headers: {
+                            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                  }
-            });
-        });
-
-        $('body').on('click', '.etatRejete', function(e){
-            e.preventDefault();
-            var id = $(this).data('id');
-            Swal.fire({
-                title: 'Confirmation !',
-                text: "Voulez-vous vraiment changer l'etat a rejete ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, mettre a jour!',
-                cancelButtonText: "Annuler",
-                customClass: {
-                confirmButton: 'btn btn-primary m-2',
-                cancelButton: 'btn btn-outline-danger m-2',
-                closeOnConfirm: false
-                },
-                buttonsStyling: false
-            }).then(function (result) {
-                  if (result.value) {
-
-                    $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                    });
                     $.ajax({
-                        url: `{{ route('demande_change_etat','')}}/${id}?etat=rejete`,
-                        method: 'get',
-                        cache: false,
-
-                        success:function(result){
-                            if(result=="ok"){
-                               window.location.href = "{{ route('colis_livraison_encours.index')}}";
+                        url: "{{route('quartier.delete','')}}/"+id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            if(result == 'done'){
+                                whichtr.addClass("bg-danger");
+                                whichtr.fadeOut(2000, function(){
+                                    this.remove();
+                                 Swal.fire({
+                                    position: 'top',
+                                    icon: 'success',
+                                    title: 'Suppression du quartier',
+                                    text: 'Quartier supprimé avec succes !',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                //location.reload();
+                            });
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Problème de suppression !'
+                                });
                             }
+
+                        },
+                        error: function (error) {
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Problème de suppression !'
+                                });
                         }
                     });
-                  }
+                }
             });
+
         });
 </script>
 <script type="text/javascript">

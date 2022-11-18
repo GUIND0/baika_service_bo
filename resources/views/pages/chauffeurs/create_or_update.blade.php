@@ -40,6 +40,18 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Telephone <span class="text-danger"> *</span></label>
+                            <input type="text" name="telephone" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}"
+                                    value="{{ $chauffeur != null ? $chauffeur->telephone : old('telephone') }}" placeholder="telephone" required/>
+                            @if($errors->has('telephone'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('telephone') }}</li>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="mb-3 col-6">
                             <label  class="form-label">Categorie Permi</label><span class="text-danger"> *</span>
                             <select class="form-control {{ $errors->has('categorie_permi') ? 'is-invalid' : ''}}" name="categorie_permi" id="categorie_permi"  style="width: 100%;" required>

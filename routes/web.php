@@ -154,5 +154,6 @@ Route::middleware(['permission','XSS'])->group(function () {
     // Demande Coli
     Route::get('colis_livraison_traite', [DemandeColiController::class, 'traite'])->name('colis_livraison_traite.index');
     Route::get('colis_livraison_encours', [DemandeColiController::class, 'encours'])->name('colis_livraison_encours.index');
+    Route::get('colis_livraison_rejete', [DemandeColiController::class, 'rejete'])->name('colis_livraison_rejete.index');
     Route::get('demande_change_etat/{id}', [DemandeColiController::class, 'demande_change_etat'])->name('demande_change_etat');
 });

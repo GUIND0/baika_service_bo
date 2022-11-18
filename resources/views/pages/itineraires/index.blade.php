@@ -9,50 +9,89 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <div class="card mb-4">
             <form action="{{route('itineraire.store')}}" method='POST' itineraire="form" id="form" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="itineraire_id" value="{{$itineraire->id ?? '' }}"/>
 
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="prix" class="form-label">Prix</label>
-                        <input type="text" id="prix" name ="prix" class="form-control prix {{ $errors->has('prix') ? 'is-invalid' : ''}}" id="prix" placeholder="Veuillez saisir le prix..."  value="{{ $itineraire != null ? $itineraire->prix : old('prix') }}" required>
-                        @if($errors->has('prix'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('prix') }}</li>
-                            </span>
-                        @endif
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="prix_min" class="form-label">Prix Min</label>
+                                <input type="text" id="prix_min" name ="prix_min" class="form-control prix_min {{ $errors->has('prix_min') ? 'is-invalid' : ''}}" id="prix_min" placeholder="Veuillez saisir le prix min..."  value="{{ $itineraire != null ? $itineraire->prix_min : old('prix_min') }}" required>
+                                @if($errors->has('prix_min'))
+                                    <span class="help-block text-danger">
+                                        <li>{{ $errors->first('prix_min') }}</li>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="prix_max" class="form-label">Prix Max</label>
+                                <input type="text" id="prix_max" name ="prix_max" class="form-control prix_max {{ $errors->has('prix_max') ? 'is-invalid' : ''}}" id="prix_max" placeholder="Veuillez saisir le prix max..."  value="{{ $itineraire != null ? $itineraire->prix_max : old('prix_max') }}" required>
+                                @if($errors->has('prix_max'))
+                                    <span class="help-block text-danger">
+                                        <li>{{ $errors->first('prix_max') }}</li>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="md-3">
+                                <label class="form-label">Depart</label><span class="text-danger"> *</span>
+                                <select class="form-control" name="depart" id="depart"  style="width: 100%;">
+                                    <option value=""> --- Veuillez selectionner un depart ---</option>
+                                    @foreach($quartiers as $quartier)
+                                        <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('depart') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('depart'))
+                                    <span class="help-block text-danger">
+                                        <ul role="alert"><li>{{ $errors->first('depart') }}</li></ul>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-3">
+                                <label class="form-label">Arrive</label><span class="text-danger"> *</span>
+                                <select class="form-control" name="arrive" id="arrive"  style="width: 100%;">
+                                    <option value=""> --- Veuillez selectionner un arrive ---</option>
+                                    @foreach($quartiers as $quartier)
+                                        <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('arrive') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('arrive'))
+                                    <span class="help-block text-danger">
+                                        <ul role="alert"><li>{{ $errors->first('arrive') }}</li></ul>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-3">
+                                <label class="form-label">Chauffeur</label><span class="text-danger"> *</span>
+                                <select class="form-control" name="chauffeur" id="chauffeur"  style="width: 100%;">
+                                    <option value=""> --- Veuillez selectionner un chauffeur ---</option>
+                                    @foreach($chauffeurs as $chauffeur)
+                                        <option {{ $itineraire != null ? $itineraire->chauffeur_id == $chauffeur->id ? 'selected' : '' : old('chauffeur') == $chauffeur->id ? 'selected' : '' }} value="{{ $chauffeur->id }}"> {{ $chauffeur->nom }} {{ $chauffeur->prenom }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('chauffeur'))
+                                    <span class="help-block text-danger">
+                                        <ul role="alert"><li>{{ $errors->first('chauffeur') }}</li></ul>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                    <div class="md-3">
-                        <label class="form-label">Depart</label><span class="text-danger"> *</span>
-                        <select class="form-control" name="depart" id="depart"  style="width: 100%;">
-                            <option value=""> --- Veuillez selectionner un depart ---</option>
-                            @foreach($quartiers as $quartier)
-                                <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('depart') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('depart'))
-                            <span class="help-block text-danger">
-                                <ul role="alert"><li>{{ $errors->first('depart') }}</li></ul>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="md-3">
-                        <label class="form-label">Arrive</label><span class="text-danger"> *</span>
-                        <select class="form-control" name="arrive" id="arrive"  style="width: 100%;">
-                            <option value=""> --- Veuillez selectionner un arrive ---</option>
-                            @foreach($quartiers as $quartier)
-                                <option {{ $itineraire != null ? $itineraire->quartier_id == $quartier->id ? 'selected' : '' : old('arrive') == $quartier->id ? 'selected' : '' }} value="{{ $quartier->id }}"> {{ $quartier->libelle }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('arrive'))
-                            <span class="help-block text-danger">
-                                <ul role="alert"><li>{{ $errors->first('arrive') }}</li></ul>
-                            </span>
-                        @endif
-                    </div>
+
+
+
                 </div>
                 <div class="mb-3">
                     <div class="row d-flex justify-content-center">
@@ -69,7 +108,7 @@
             </form>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
@@ -140,8 +179,20 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'prix',
-                    title: "Prix",
+                    field: 'prix_min',
+                    title: "Prix Min",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'prix_max',
+                    title: "Prix Max",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'chauffeur',
+                    title: "Chauffeur",
                     sortable: true,
                     filterControl: "input",
                 },

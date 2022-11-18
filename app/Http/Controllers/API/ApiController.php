@@ -474,9 +474,23 @@ class ApiController extends Controller
 
     public function get_prix($depart_id , $arrive_id){
 
-        $itineraire = Itineraire::where('quartiers_id',$depart_id)->where('quartiers_id1',$arrive_id)->first();
+        $itineraire = Itineraire::select(
+            DB::raw('itineraires.*'),
+            DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
+            DB::raw("chauffeurs.telephone as telephone"),
+            )
+            ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
+            ->where('quartiers_id',$depart_id)->where('quartiers_id1',$arrive_id)->first();
+
         if($itineraire == null){
-            $itineraire = Itineraire::where('quartiers_id1',$depart_id)->where('quartiers_id',$arrive_id)->first();
+            $itineraire = Itineraire::select(
+                DB::raw('itineraires.*'),
+                DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
+                DB::raw("chauffeurs.telephone as telephone"),
+                )
+                ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
+                ->where('quartiers_id1',$depart_id)->where('quartiers_id',$arrive_id)->first();
+
 
             if($itineraire == null){
                 return 0;

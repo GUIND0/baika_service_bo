@@ -42,15 +42,20 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ (request()->routeIs('colis_livraison_encours.*')) || (request()->routeIs('colis_livraison_traite.*')) ? 'active open' : '' }}">
+        <li class="menu-item {{(request()->routeIs('colis_livraison_rejete.*')) || (request()->routeIs('colis_livraison_encours.*')) || (request()->routeIs('colis_livraison_traite.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon fa fa-cube text-dark"  style="font-size:20px;"></i>
-                <div data-i18n="Analytics">Colis Livraison <span class="badge badge-center rounded-pill bg-danger">{{ $demande_encours }}</span></div>
+                <div data-i18n="Analytics">Colis Livraison <span class="badge badge-center rounded-pill bg-warning">{{ $demande_encours }}</span></div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ (request()->routeIs('colis_livraison_encours.index')) ? 'active' : '' }}">
                     <a href="{{ route('colis_livraison_encours.index') }}" class="menu-link">
-                        <div data-i18n="Perfect Scrollbar">Non traite <span class="badge badge-center rounded-pill bg-danger">{{ $demande_encours }}</span></div>
+                        <div data-i18n="Perfect Scrollbar">Non traite <span class="badge badge-center rounded-pill bg-warning">{{ $demande_encours }}</span></div>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->routeIs('colis_livraison_rejete.index')) ? 'active' : '' }}">
+                    <a href="{{ route('colis_livraison_rejete.index') }}" class="menu-link">
+                        <div data-i18n="Text Divider">Rejete <span class="badge badge-center rounded-pill bg-danger">{{ $demande_rejete }}</span></div>
                     </a>
                 </li>
                 <li class="menu-item {{ (request()->routeIs('colis_livraison_traite.index')) ? 'active' : '' }}">
