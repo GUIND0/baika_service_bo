@@ -51,3 +51,6 @@ Route::get('/type_colis', [ApiController::class, 'type_colis']);
 
 Route::post('/create_demande_colis', [ApiController::class, 'create_demande_colis']);
 
+Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
+
+

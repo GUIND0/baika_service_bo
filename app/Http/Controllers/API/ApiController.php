@@ -8,6 +8,7 @@ use App\Models\Chauffeur;
 use App\Models\DemandeColi;
 use App\Models\Evenement;
 use App\Models\Image;
+use App\Models\Itineraire;
 use App\Models\Location;
 use App\Models\Quartier;
 use App\Models\Ticket;
@@ -456,14 +457,32 @@ class ApiController extends Controller
         $demande->etat = 'encours';
         $demande->poids = $poids;
         $demande->valeur = $valeur;
-
-        if( $demande->save()){
-            return response(["success"=>" La demande est crée avec succes"],200);
+        $departVerf = Quartier::find($depart);
+        $arriveVerf = Quartier::find($arrive);
+        if( $departVerf&& $arriveVerf){
+            if( $demande->save()){
+                return response(["success"=>" La demande est crée avec succes"],200);
+            }else {
+                return response(["error"=>" Le dossier n'as pas pu etre crée"],400);
+            }
         }else {
-            return response(["error"=>" Le dossier n'as pas pu etre crée"],400);
+            return response(["error"=>" Depart ID ou Arrive ID introuvable "],400);
         }
+
     }
 
+    public function get_prix($depart_id , $arrive_id){
 
+        $itineraire = Itineraire::where('quartiers_id',$depart_id)->where('quartiers_id1',$arrive_id)->first();
+        if($itineraire == null){
+            $itineraire = Itineraire::where('quartiers_id1',$depart_id)->where('quartiers_id',$arrive_id)->first();
+
+            if($itineraire == null){
+                return 0;
+            }
+        }
+
+        return $itineraire->toJson();
+    }
 
 }

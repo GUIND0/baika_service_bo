@@ -13,7 +13,7 @@ class Itineraire extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
-
+    protected $hidden = ['created_at', 'updated_at'];
 
     protected static function booted()
     {
