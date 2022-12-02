@@ -96,6 +96,67 @@ class ApiController extends Controller
         return $ticket->toJson();
     }
 
+    public function create_get_ticket(Request $request){
+
+
+        //Variable
+        $nom                = $request->nom ;
+        $ticket             = $request->ticket ;
+        $nbr_ticket         = $request->nbr_ticket ;
+        $telephone          = $request->telephone ;
+
+
+
+        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
+        if($nom == null){
+            return response(["error"=>"Le nom doit etre renseigné"],400);
+        }
+
+
+        if($nbr_ticket == null){
+            return response(["error"=>"Le nombre de ticket doit etre renseigné"],400);
+        }
+        if($ticket == null){
+            return response(["error"=>"L'Id du ticket doit etre renseigné"],400);
+        }
+        if($telephone == null){
+            return response(["error"=>"Le telephone doit etre renseigné"],400);
+        }
+
+
+        $get_ticket  = new GetTicket();
+
+        $get_ticket->nom = $nom;
+        $get_ticket->tickets_id = $ticket;
+        $get_ticket->telephone = $telephone;
+
+        $ticket = Ticket::find($ticket);
+        if($ticket){
+            if($ticket->ticket_restant >= $nbr_ticket){
+                $get_ticket->nbr_ticket = $nbr_ticket;
+                $get_ticket->pu = $ticket->prix;
+                $get_ticket->ttc = $ticket->prix * $nbr_ticket ;
+
+                if($get_ticket->save()){
+                    $ticket->ticket_restant = $ticket->ticket_restant - $get_ticket->nbr_ticket;
+                    if($ticket->save()){
+                        return response(["success"=>"Le Ticket est crée avec succes"],200);
+                    }
+
+                }else {
+                    return response(["error"=>" Le Ticket n'as pas pu etre crée"],400);
+                }
+
+            }
+            return response(["error"=>" Pas assez de ticket"],400);
+
+        }
+
+        return response(["error"=>" Ticket introuvable"],404);
+
+
+    }
+
     public function chauffeurs(Request $request){
         $chauffeurs = Chauffeur::select(
             DB::raw("chauffeurs.*"),
@@ -581,66 +642,7 @@ class ApiController extends Controller
     }
 
 
-    public function create_get_ticket(Request $request){
 
-
-        //Variable
-        $nom                = $request->nom ;
-        $ticket             = $request->ticket ;
-        $nbr_ticket         = $request->nbr_ticket ;
-        $telephone          = $request->telephone ;
-
-
-
-        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
-        if($nom == null){
-            return response(["error"=>"Le nom doit etre renseigné"],400);
-        }
-
-
-        if($nbr_ticket == null){
-            return response(["error"=>"Le nombre de ticket doit etre renseigné"],400);
-        }
-        if($ticket == null){
-            return response(["error"=>"L'Id du ticket doit etre renseigné"],400);
-        }
-        if($telephone == null){
-            return response(["error"=>"Le telephone doit etre renseigné"],400);
-        }
-
-
-        $get_ticket  = new GetTicket();
-
-        $get_ticket->nom = $nom;
-        $get_ticket->tickets_id = $ticket;
-        $get_ticket->telephone = $telephone;
-
-        $ticket = Ticket::find($ticket);
-        if($ticket){
-            if($ticket->ticket_restant >= $nbr_ticket){
-                $get_ticket->nbr_ticket = $nbr_ticket;
-                $get_ticket->pu = $ticket->prix;
-                $get_ticket->ttc = $ticket->prix * $nbr_ticket ;
-
-                if($get_ticket->save()){
-                    $ticket->ticket_restant = $ticket->ticket_restant - $get_ticket->nbr_ticket;
-                    if($ticket->save()){
-                        return response(["success"=>"Le Ticket est crée avec succes"],200);
-                    }
-
-                }else {
-                    return response(["error"=>" Le Ticket n'as pas pu etre crée"],400);
-                }
-
-            }
-            return response(["error"=>" Pas assez de ticket"],400);
-
-        }
-
-        return response(["error"=>" Ticket introuvable"],404);
-
-
-    }
 
     public function create_get_evenement_ticket(Request $request){
 
