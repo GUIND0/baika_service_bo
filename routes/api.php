@@ -40,6 +40,9 @@ Route::get('/location/{location_id}', [ApiController::class, 'location']);
 //loaction Image
 Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
 
+Route::post('/create_get_ticket', [ApiController::class, 'create_get_ticket']);
+
+Route::post('/create_get_evenement_ticket', [ApiController::class, 'create_get_evenement_ticket']);
 //all tourisme
 Route::get('/tourismes', [ApiController::class, 'tourismes']);
 //Single tourisme
@@ -58,7 +61,6 @@ Route::post('/create_demande_taxi', [ApiController::class, 'create_demande_taxi'
 
 Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
 
-Route::post('/create_get_ticket', [ApiController::class, 'create_get_ticket']);
-Route::post('/create_get_evenement_ticket', [ApiController::class, 'create_get_evenement_ticket']);
+
 
 
