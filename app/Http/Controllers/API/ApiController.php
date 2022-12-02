@@ -80,6 +80,20 @@ class ApiController extends Controller
         return $tickets->toJson();
     }
 
+    public function ticket($id){
+        $ticket = Ticket::select(
+            DB::raw("tickets.*"),
+            DB::raw("compagnies.libelle as compagnie"),
+            DB::raw("trajets.libelle as trajet")
+            )
+            ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
+            ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
+            ->where('tickets.id',$id)
+            ->first()->makeHidden(['created_at','updated_at']);
+
+        return $ticket->toJson();
+    }
+
     public function chauffeurs(Request $request){
         $chauffeurs = Chauffeur::select(
             DB::raw("chauffeurs.*"),
@@ -198,7 +212,17 @@ class ApiController extends Controller
 
 
 
+    public function evenement($id){
+        $evenement = Evenement::select(
+            DB::raw("evenements.*"),
+            DB::raw("images.path as image")
+            )
+            ->join('images', 'images.evenements_id', 'evenements.id')
+            ->where('evenements.id',$id)
+            ->first()->makeHidden(['created_at','updated_at']);
 
+        return $evenement->toJson();
+    }
 
      /**
      * @OA\Get(

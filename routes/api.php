@@ -24,9 +24,12 @@ Route::get('/automobiles', [ApiController::class, 'automobiles']);
 Route::get('/automobile/{automobile_id}', [ApiController::class, 'automobile']);
 //Tickect
 Route::get('/tickets', [ApiController::class, 'tickets']);
+// Single ticket
+Route::get('/ticket/{ticket_id}', [ApiController::class, 'ticket']);
 //Evenement
 Route::get('/evenements', [ApiController::class, 'evenements']);
-
+// Single evenement
+Route::get('/evenement/{evenement_id}', [ApiController::class, 'evenement']);
 //Chauffeur
 Route::get('/chauffeurs', [ApiController::class, 'chauffeurs']);
 
