@@ -58,4 +58,7 @@ Route::post('/create_demande_taxi', [ApiController::class, 'create_demande_taxi'
 
 Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
 
+Route::post('/create_get_ticket', [ApiController::class, 'create_get_ticket']);
+Route::post('/create_get_evenement_ticket', [ApiController::class, 'create_get_evenement_ticket']);
+
 
