@@ -96,7 +96,7 @@ class ApiController extends Controller
         return $ticket->toJson();
     }
 
-    public function create_get_ticket(Request $request){
+    public function create_ticket(Request $request){
 
 
         //Variable
@@ -644,7 +644,7 @@ class ApiController extends Controller
 
 
 
-    public function create_get_evenement_ticket(Request $request){
+    public function create_evenement_ticket(Request $request){
 
 
         //Variable

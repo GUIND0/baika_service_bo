@@ -40,9 +40,9 @@ Route::get('/location/{location_id}', [ApiController::class, 'location']);
 //loaction Image
 Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
 
-Route::post('/create_get_ticket', [ApiController::class, 'create_get_ticket']);
+Route::post('/create_ticket', [ApiController::class, 'create_ticket']);
 
-Route::post('/create_get_evenement_ticket', [ApiController::class, 'create_get_evenement_ticket']);
+Route::post('/create_evenement_ticket', [ApiController::class, 'create_evenement_ticket']);
 //all tourisme
 Route::get('/tourismes', [ApiController::class, 'tourismes']);
 //Single tourisme
