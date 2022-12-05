@@ -21,39 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
 {
-    /**
-     * @OA\Get(
-     *      path="/api/automobiles",
-     *      operationId="automobiles",
-     *      tags={"Api Baika Service"},
-
-     *      summary="Route automobiles",
-     *      description="Retourne toutes les automobiles",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Vous n'êtes pas autorisé à consulter cette page."
-     *      ),
-     * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="La ressource demandée est introuvable."
-     *   ),
-     *  )
-     */
+    
     public function automobiles(Request $request){
         $automobiles = Automobile::select(
             DB::raw("automobiles.*"),
@@ -107,7 +75,6 @@ class ApiController extends Controller
 
 
 
-        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
         if($nom == null){
             return response(["error"=>"Le nom doit etre renseigné"],400);
         }
@@ -212,50 +179,7 @@ class ApiController extends Controller
         return $type_colis->toJson();
     }
 
-    /**
-     * @OA\Get(
-     *      path="/api/automobile/{automobile_id}",
-     *      operationId="automobile Single",
-     *      tags={"Api Baika Service"},
-
-     *      summary="Route automobiles Image",
-     *      description="Retourne une automobile",
-     *      @OA\Parameter(
-     *         description="ID of User",
-    *          in="path",
-    *          name="automobile_id",
-    *          required=true,
-    *          example="e1c26f26-7c78-4d06-85c0-132052644648",
-    *          @OA\Schema(
-    *          type="string",
-    *
-     *    )
-     *           ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Vous n'êtes pas autorisé à consulter cette page."
-     *      ),
-     * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="La ressource demandée est introuvable."
-     *   ),
-     *  )
-     */
+    
 
 
     public function automobile($id){
@@ -287,48 +211,7 @@ class ApiController extends Controller
         return $evenement->toJson();
     }
 
-     /**
-     * @OA\Get(
-     *      path="/api/location/{location_id}/images",
-     *      operationId="locationsImage",
-     *      tags={"Api Baika Service"},
-
-     *      summary="Route locations Image",
-     *      description="Retourne toutes les limages d'une location",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Pour la obtenir les images",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *           ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Vous n'êtes pas autorisé à consulter cette page."
-     *      ),
-     * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="La ressource demandée est introuvable."
-     *   ),
-     *  )
-     */
+    
 
     public function location_images($id){
         $images = Image::where('locations_id',$id)->get();
@@ -348,51 +231,7 @@ class ApiController extends Controller
 
 
 
-     /**
-     * @OA\Get(
-     *      path="/api/location/{location_id}",
-     *      operationId="location Single",
-     *      tags={"Api Baika Service"},
-
-     *      summary="Route locations Image",
-     *      description="Retourne une location",
-     *      @OA\Parameter(
-     *         description="ID of User",
-    *          in="path",
-    *          name="location_id",
-    *          required=true,
-    *          example="e1c26f26-7c78-4d06-85c0-132052644648",
-    *          @OA\Schema(
-    *          type="string",
-    *
-     *    )
-     *           ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Vous n'êtes pas autorisé à consulter cette page."
-     *      ),
-     * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="La ressource demandée est introuvable."
-     *   ),
-     *  )
-     */
-
+     
 
     public function location($id){
         $location = Location::select(
@@ -433,39 +272,7 @@ class ApiController extends Controller
 
 
 
-/**
-     * @OA\Get(
-     *      path="/api/locations",
-     *      operationId="locations",
-     *      tags={"Api Baika Service"},
 
-     *      summary="Route locations",
-     *      description="Retourne toutes les locations",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Vous n'êtes pas autorisé à consulter cette page."
-     *      ),
-     * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="La ressource demandée est introuvable."
-     *   ),
-     *  )
-     */
     public function locations(){
         $locations = Location::select(
             DB::raw("locations.*"),
@@ -514,7 +321,6 @@ class ApiController extends Controller
         $poids              = $request->poids ;
         $valeur             = $request->valeur ;
 
-        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
         if($nom == null){
             return response(["error"=>"Le nom doit etre renseigné"],400);
         }
@@ -599,7 +405,6 @@ class ApiController extends Controller
 
 
 
-        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
         if($nom == null){
             return response(["error"=>"Le nom doit etre renseigné"],400);
         }
@@ -655,7 +460,6 @@ class ApiController extends Controller
 
 
 
-        // http://127.0.0.1:8000/api/create_demande_colis?nom=%22Nouhou%22?prenom=%22Maiga%22?telephone=%2290909090%22?depart="d3775f06-e7e2-451c-b90f-e9f1e870c58b"?arrive="ed53a167-2556-485c-bdfd-57404f14ced1"?type_coli="573e88b8-ee8c-4c8d-8011-2f23bcc7616c"?poids="5"?valeur=12000
         if($nom == null){
             return response(["error"=>"Le nom doit etre renseigné"],400);
         }
