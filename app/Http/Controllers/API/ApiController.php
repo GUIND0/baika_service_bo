@@ -75,8 +75,7 @@ class ApiController extends Controller
 
 
 
-        if($nom == null){
-            return response(["error"=>"Le nom doit etre renseigné"],400);
+        if($nom == null){ return response(["error"=>"Le nom doit etre renseigné"],400);
         }
 
 
