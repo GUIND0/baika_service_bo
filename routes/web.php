@@ -115,6 +115,7 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/ticket/{id?}', [TicketController::class, 'create_or_update'])->name('ticket.create_or_update');
     Route::post('ticket/store', [TicketController::class, 'store'])->name('ticket.store');
     Route::delete('ticket/delete/{id}', [TicketController::class, 'delete'])->name('ticket.delete');
+    Route::get('ticket/show/{id}', [TicketController::class, 'show'])->name('ticket.show');
 
     // Location
     Route::get('locations', [LocationController::class, 'index'])->name('location.index');
@@ -150,6 +151,7 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('/evenement/{id?}', [EvenementController::class, 'create_or_update'])->name('evenement.create_or_update');
     Route::post('evenement/store', [EvenementController::class, 'store'])->name('evenement.store');
     Route::delete('evenement/delete/{id}', [EvenementController::class, 'delete'])->name('evenement.delete');
+    Route::get('evenement/show/{id}', [EvenementController::class, 'show'])->name('evenement.show');
 
     // Demande Coli
     Route::get('colis_livraison_traite', [DemandeColiController::class, 'traite'])->name('colis_livraison_traite.index');

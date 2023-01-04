@@ -22,9 +22,44 @@
         </div>
     </div>
     {{-- end liste --}}
+    <div class="modal modal-top fade" id="details_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="max-width: 80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Informations détaillées</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body" id="modalcontent">
+                    <h3>Chargement en cours....</h3>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 @endsection
 @section('script')
+<script>
+      $( document ).ready(function() {
+        $('body').on('click', '.sositem', function () {
+            var id = $(this).data("idd");
+            $("#details_modal").modal("show");
+            $('#modalcontent').html('<h3>Chargement en cours....</h3>');
+            $.ajax({
+                url: "{{url('ticket/show')}}/" + id,
+                cache: false,
+                async: true
+            })
+            .done(function( html ) {
+                $("#modalcontent").html(html);
+            });
+        });
+    });
+</script>
+
 
 <script>
 
@@ -98,6 +133,7 @@
                     title: "Prix (XOF)",
                     sortable: true,
                     filterControl: "input",
+                    formatter:amountFormatter,
                 },
                  {
                     field: 'id',
@@ -116,12 +152,16 @@
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
+                        <a title="Détails" href="#" data-idd="${value}" class="sositem btn btn-outline-info waves-effect" >
+                            <i class="fa fa-eye"></i>
+                        </a>
                         <a href="{{ route('ticket.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
                             <i class="fa fa-trash"></i>
                         </a>
+
                     </div>`;
         }
 

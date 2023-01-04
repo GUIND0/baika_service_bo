@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\Trajet;
 use App\Models\Compagnie;
+use App\Models\GetTicket;
 use Illuminate\Support\Facades\DB;
 
 
@@ -95,4 +96,31 @@ class TicketController extends Controller
             return "fail";
         }
     }
+
+    public function show($id)
+    {
+
+        $ticket = Ticket::select(
+            DB::raw("tickets.*"),
+            DB::raw("trajets.libelle as trajet"),
+            DB::raw("compagnies.libelle as compagnie")
+        )
+            ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
+            ->join('trajets', 'trajets.id', 'tickets.trajets_id')
+            ->where('tickets.id',$id)
+            ->first();
+
+        $get_tickets = GetTicket::select(
+            DB::raw("get_tickets.*"),
+
+        )
+            ->where('get_tickets.tickets_id',$id)
+            ->get();
+
+
+        return view('pages.tickets.show', compact('get_tickets','ticket'));
+
+
+    }
+
 }

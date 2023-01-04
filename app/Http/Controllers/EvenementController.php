@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\GetEvenementTicket;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -114,5 +115,26 @@ class EvenementController extends Controller
         } else {
             return "fail";
         }
+    }
+
+    public function show($id)
+    {
+
+        $evenement = Evenement::select(
+            DB::raw("evenements.*"),
+
+        )
+
+            ->where('evenements.id',$id)
+            ->first();
+
+        $get_evenements = GetEvenementTicket::select(
+            DB::raw("get_evenement_tickets.*"),
+
+        )
+            ->where('get_evenement_tickets.evenements_id',$id)
+            ->get();
+
+        return view('pages.evenements.show',compact('get_evenements','evenement'));
     }
 }
