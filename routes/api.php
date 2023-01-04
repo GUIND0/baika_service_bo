@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => ['auth:sanctum']],function(){
-
-});
 
 // All automobile
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
@@ -40,7 +37,7 @@ Route::get('/location/{location_id}', [ApiController::class, 'location']);
 //loaction Image
 Route::get('/location/{location_id}/images', [ApiController::class, 'location_images']);
 
-Route::post('/create_ticket', [ApiController::class, 'create_ticket']);
+Route::post('/create-ticket', [ApiController::class, 'create_ticket']);
 
 Route::post('/create_evenement_ticket', [ApiController::class, 'create_evenement_ticket']);
 //all tourisme
