@@ -18,7 +18,7 @@ class PermissionAuth
     {
         //auth
         if (auth()->guest()) {
-            return redirect('/login');
+            return redirect()->route('login');
         }
 
         return $next($request);
