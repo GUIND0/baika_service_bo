@@ -41,7 +41,7 @@ Route::post('/mot-de-passe-oublie', [UserController::class, 'motDePasseSend'])->
 Route::get('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseLien'])->name('mot_de_passe.lien');
 Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseChange'])->name('mot_de_passe.change');
 
-Route::middleware(['permission','XSS'])->group(function () {
+// Route::middleware(['permission','XSS'])->group(function () {
 
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
 
@@ -158,4 +158,4 @@ Route::middleware(['permission','XSS'])->group(function () {
     Route::get('colis_livraison_encours', [DemandeColiController::class, 'encours'])->name('colis_livraison_encours.index');
     Route::get('colis_livraison_rejete', [DemandeColiController::class, 'rejete'])->name('colis_livraison_rejete.index');
     Route::get('demande_change_etat/{id}', [DemandeColiController::class, 'demande_change_etat'])->name('demande_change_etat');
-});
+// });
