@@ -1,6 +1,6 @@
 
 @extends('partials.main')
-@section('title1')Colis Livraison Rejete
+@section('title1')Demande Taxi Rejete
 @endsection
 @section('style')
 <style>
@@ -28,7 +28,7 @@
 @section("script")
 <script>
     $('#table-javascript').bootstrapTable({
-           data: @json($colis_livraison_rejete),
+           data: @json($demande_taxi_rejete),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -82,6 +82,12 @@
                     filterControl: "input",
                 },
                 {
+                    field: 'prix',
+                    title: "Prix",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
                     field: 'depart',
                     title: "Depart",
                     sortable: true,
@@ -93,24 +99,7 @@
                     sortable: true,
                     filterControl: "input",
                 },
-                {
-                    field: 'colis',
-                    title: "Type de Coli",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'poids',
-                    title: "Poids",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'valeur',
-                    title: "Valeur",
-                    sortable: true,
-                    filterControl: "input",
-                },
+
                 {
                     field: 'user',
                     title: "Rejete par",

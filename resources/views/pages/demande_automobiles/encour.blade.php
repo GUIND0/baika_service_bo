@@ -1,6 +1,6 @@
 
 @extends('partials.main')
-@section('title1')Demande Taxi Encours
+@section('title1')Demande Auto Encours
 @endsection
 @section('style')
 <style>
@@ -27,7 +27,7 @@
 @section("script")
 <script>
     $('#table-javascript').bootstrapTable({
-           data: @json($demande_taxi_encours),
+           data: @json($demande_auto_encours),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -68,7 +68,6 @@
                     sortable: true,
                     filterControl: "input",
                 },
-
                 {
                     field: 'telephone',
                     title: "Telephone",
@@ -76,23 +75,12 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'prix',
-                    title: "Prix",
+                    field: 'automobile',
+                    title: "Automobile",
                     sortable: true,
                     filterControl: "input",
                 },
-                {
-                    field: 'depart',
-                    title: "Depart",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'arrive',
-                    title: "Arrive",
-                    sortable: true,
-                    filterControl: "input",
-                },
+
                 {
                     field: 'id',
                     title: "Actions",
@@ -140,13 +128,13 @@
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                     });
                     $.ajax({
-                        url: `{{ route('demande_taxi_change_etat','')}}/${id}?etat=traite`,
+                        url: `{{ route('demande_auto_change_etat','')}}/${id}?etat=traite`,
                         method: 'get',
                         cache: false,
 
                         success:function(result){
                             if(result=="ok"){
-                               window.location.href = "{{ route('demande_taxi_encours.index')}}";
+                               window.location.href = "{{ route('demande_auto_encours.index')}}";
                             }
                         }
                     });
@@ -177,13 +165,13 @@
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                     });
                     $.ajax({
-                        url: `{{ route('demande_taxi_change_etat','')}}/${id}?etat=rejete`,
+                        url: `{{ route('demande_auto_change_etat','')}}/${id}?etat=rejete`,
                         method: 'get',
                         cache: false,
 
                         success:function(result){
                             if(result=="ok"){
-                               window.location.href = "{{ route('demande_taxi_encours.index')}}";
+                               window.location.href = "{{ route('demande_auto_encours.index')}}";
                             }
                         }
                     });

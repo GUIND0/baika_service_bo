@@ -33,11 +33,9 @@ class DemandeTaxiController extends Controller
 
         $demande_taxi_traite = DemandeTaxi::select(
             DB::raw('demande_taxis.*'),
-            DB::raw('type_colis.libelle as colis'),
             DB::raw("CONCAT(users.nom,' ',users.prenom) as user"),
             )
         ->where('demande_taxis.etat','traite')
-        ->leftJoin('type_colis','type_colis.id','demande_taxis.type_colis_id')
         ->leftJoin('users','users.id','demande_taxis.users_id')
         ->orderByDesc('created_at')
         ->get();
@@ -57,11 +55,10 @@ class DemandeTaxiController extends Controller
 
         $demande_taxi_rejete = DemandeTaxi::select(
             DB::raw('demande_taxis.*'),
-            DB::raw('type_colis.libelle as colis'),
+
             DB::raw("CONCAT(users.nom,' ',users.prenom) as user"),
             )
         ->where('demande_taxis.etat','rejete')
-        ->leftJoin('type_colis','type_colis.id','demande_taxis.type_colis_id')
         ->leftJoin('users','users.id','demande_taxis.users_id')
         ->orderByDesc('created_at')
         ->get();
@@ -83,7 +80,7 @@ class DemandeTaxiController extends Controller
             $demande->users_id = auth()->user()->id;
             if($demande->save()){
                 flash()->success('Succès  !', 'Demande taxi Mise a jour  avec succès');
-                return back();
+                return 'ok';
             }
         }
 

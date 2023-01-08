@@ -15,7 +15,9 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\AutomobileController;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\DemandeAutoController;
 use App\Http\Controllers\DemandeColiController;
+use App\Http\Controllers\DemandeTaxiController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\TourismeController;
 use App\Http\Controllers\TypeColiController;
@@ -158,4 +160,18 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
     Route::get('colis_livraison_encours', [DemandeColiController::class, 'encours'])->name('colis_livraison_encours.index');
     Route::get('colis_livraison_rejete', [DemandeColiController::class, 'rejete'])->name('colis_livraison_rejete.index');
     Route::get('demande_change_etat/{id}', [DemandeColiController::class, 'demande_change_etat'])->name('demande_change_etat');
+
+
+    // Demande Taxi
+    Route::get('demande_taxi_traite', [DemandeTaxiController::class, 'traite'])->name('demande_taxi_traite.index');
+    Route::get('demande_taxi_encours', [DemandeTaxiController::class, 'encours'])->name('demande_taxi_encours.index');
+    Route::get('demande_taxi_rejete', [DemandeTaxiController::class, 'rejete'])->name('demande_taxi_rejete.index');
+    Route::get('demande_taxi_change_etat/{id}', [DemandeTaxiController::class, 'demande_change_etat'])->name('demande_taxi_change_etat');
+
+
+    // Demande Auto
+    Route::get('demande_auto_traite', [DemandeAutoController::class, 'traite'])->name('demande_auto_traite.index');
+    Route::get('demande_auto_encours', [DemandeAutoController::class, 'encours'])->name('demande_auto_encours.index');
+    Route::get('demande_auto_rejete', [DemandeAutoController::class, 'rejete'])->name('demande_auto_rejete.index');
+    Route::get('demande_auto_change_etat/{id}', [DemandeAutoController::class, 'demande_change_etat'])->name('demande_auto_change_etat');
  });

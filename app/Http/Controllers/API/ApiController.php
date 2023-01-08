@@ -8,6 +8,7 @@ use App\Models\Chauffeur;
 use App\Models\DemandeColi;
 use App\Models\DemandeTaxi;
 use App\Models\Evenement;
+use App\Models\GetAutomobile;
 use App\Models\GetEvenementTicket;
 use App\Models\GetTicket;
 use App\Models\Image;
@@ -21,7 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
 {
-    
+
     public function automobiles(Request $request){
         $automobiles = Automobile::select(
             DB::raw("automobiles.*"),
@@ -178,7 +179,7 @@ class ApiController extends Controller
         return $type_colis->toJson();
     }
 
-    
+
 
 
     public function automobile($id){
@@ -210,7 +211,7 @@ class ApiController extends Controller
         return $evenement->toJson();
     }
 
-    
+
 
     public function location_images($id){
         $images = Image::where('locations_id',$id)->get();
@@ -230,7 +231,7 @@ class ApiController extends Controller
 
 
 
-     
+
 
     public function location($id){
         $location = Location::select(
@@ -307,6 +308,40 @@ class ApiController extends Controller
         return $tourismes->toJson();
     }
 
+    public function create_automobile(Request $request){
+        $nom                = $request->nom ;
+        $automobile             = $request->automobile ;
+        $telephone          = $request->telephone ;
+
+        if($nom == null){
+            return response(["error"=>"Le nom doit etre renseigné"],400);
+        }
+        if($automobile == null){
+            return response(["error"=>"Le prénom doit etre renseigné"],400);
+        }
+        if($telephone == null){
+            return response(["error"=>"Le telephone doit etre renseigné"],400);
+        }
+
+        $automobileVerif = Automobile::find($automobile);
+        if(!$automobileVerif){
+            return response(["error"=>" Automobile Introuvable"],404);
+        }
+        $get_automobile  = new GetAutomobile();
+
+        $get_automobile->nom = $nom;
+
+        $get_automobile->automobiles_id = $automobile;
+        $get_automobile->telephone = $telephone;
+        $get_automobile->etat = 'encours';
+
+        if( $get_automobile->save()){
+            return response(["success"=>" La demande automobile est crée avec succes"],200);
+        }else {
+            return response(["error"=>" La demande n'as pas pu etre crée"],400);
+        }
+
+    }
     public function create_demande_colis(Request $request){
 
 

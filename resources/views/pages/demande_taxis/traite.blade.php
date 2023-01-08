@@ -1,6 +1,6 @@
 
 @extends('partials.main')
-@section('title1')Colis Livraison Traite
+@section('title1')Demande Taxi Traite
 @endsection
 @section('style')
 <style>
@@ -28,7 +28,7 @@
 @section("script")
 <script>
     $('#table-javascript').bootstrapTable({
-           data: @json($colis_livraison_traite),
+           data: @json($demande_taxi_traite),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -82,6 +82,12 @@
                     filterControl: "input",
                 },
                 {
+                    field: 'prix',
+                    title: "Prix",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
                     field: 'depart',
                     title: "Depart",
                     sortable: true,
@@ -90,24 +96,6 @@
                 {
                     field: 'arrive',
                     title: "Arrive",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'colis',
-                    title: "Type de Coli",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'poids',
-                    title: "Poids",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
-                    field: 'valeur',
-                    title: "Valeur",
                     sortable: true,
                     filterControl: "input",
                 },
