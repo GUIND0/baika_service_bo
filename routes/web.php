@@ -14,13 +14,17 @@ use App\Http\Controllers\TypeLocationController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\AutomobileController;
+use App\Http\Controllers\BilletAvionController;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\CompagnieAerienneController;
 use App\Http\Controllers\DemandeAutoController;
 use App\Http\Controllers\DemandeColiController;
 use App\Http\Controllers\DemandeTaxiController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\TourismeController;
+use App\Http\Controllers\TrajetAvionController;
 use App\Http\Controllers\TypeColiController;
+use App\Models\CompagnieAerienne;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,4 +178,23 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
     Route::get('demande_auto_encours', [DemandeAutoController::class, 'encours'])->name('demande_auto_encours.index');
     Route::get('demande_auto_rejete', [DemandeAutoController::class, 'rejete'])->name('demande_auto_rejete.index');
     Route::get('demande_auto_change_etat/{id}', [DemandeAutoController::class, 'demande_change_etat'])->name('demande_auto_change_etat');
+
+
+    // compagnie Aerienne
+    Route::get('/compagnie_aerienne/{compagnie_aerienne_id?}', [CompagnieAerienneController::class, 'index'])->name('compagnie_aerienne.index');
+    Route::post('/compagnie_aerienne/store', [CompagnieAerienneController::class, 'store'])->name('compagnie_aerienne.store');
+    Route::delete('/compagnie_aerienne/delete/{id}', [CompagnieAerienneController::class, 'delete'])->name('compagnie_aerienne.delete');
+
+    // trajet Avion
+    Route::get('/trajet_avion/{trajet_avion_id?}', [ TrajetAvionController::class, 'index'])->name('trajet_avion.index');
+    Route::post('/trajet_avion/store', [ TrajetAvionController::class, 'store'])->name('trajet_avion.store');
+    Route::delete('/trajet_avion/delete/{id}', [ TrajetAvionController::class, 'delete'])->name('trajet_avion.delete');
+
+
+     // Billet
+     Route::get('billets', [BilletAvionController::class, 'index'])->name('billet.index');
+     Route::get('/billet/{id?}', [BilletAvionController::class, 'create_or_update'])->name('billet.create_or_update');
+     Route::post('billet/store', [BilletAvionController::class, 'store'])->name('billet.store');
+     Route::delete('billet/delete/{id}', [BilletAvionController::class, 'delete'])->name('billet.delete');
+     Route::get('billet/show/{id}', [BilletAvionController::class, 'show'])->name('billet.show');
  });

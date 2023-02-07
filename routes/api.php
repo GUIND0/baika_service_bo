@@ -55,10 +55,17 @@ Route::get('/type_colis', [ApiController::class, 'type_colis']);
 Route::post('/create_demande_colis', [ApiController::class, 'create_demande_colis']);
 
 Route::post('/create_demande_taxi', [ApiController::class, 'create_demande_taxi']);
+Route::post('/create-billet', [ApiController::class, 'create_billet']);
 
 Route::post('/create-automobile', [ApiController::class, 'create_automobile']);
 
 Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
+
+//Billets
+Route::get('/billets', [ApiController::class, 'billets']);
+// Single billet
+Route::get('/billet/{billet_id}', [ApiController::class, 'billet']);
+
 
 
 

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Automobile;
+use App\Models\BilletAvion;
 use App\Models\Chauffeur;
 use App\Models\DemandeColi;
 use App\Models\DemandeTaxi;
 use App\Models\Evenement;
 use App\Models\GetAutomobile;
+use App\Models\GetBillet;
 use App\Models\GetEvenementTicket;
 use App\Models\GetTicket;
 use App\Models\Image;
@@ -122,6 +124,91 @@ class ApiController extends Controller
         return response(["error"=>" Ticket introuvable"],404);
 
 
+    }
+
+    public function billets(Request $request){
+        $billets = BilletAvion::select(
+            DB::raw("billet_avions.*"),
+            DB::raw("compagnie_aeriennes.libelle as compagnie"),
+            DB::raw("trajet_avions.libelle as trajet")
+            )
+            ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
+            ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return $billets->toJson();
+    }
+
+    public function billet($id){
+        $billet = BilletAvion::select(
+            DB::raw("billet_avions.*"),
+            DB::raw("compagnie_aeriennes.libelle as compagnie"),
+            DB::raw("trajet_avions.libelle as trajet")
+            )
+            ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
+            ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
+            ->where('billet_avions.id',$id)
+            ->first()->makeHidden(['created_at','updated_at']);
+
+        return $billet->toJson();
+    }
+
+    public function create_billet(Request $request){
+
+
+        //Variable
+        $nom                = $request->nom ;
+        $billet             = $request->billet ;
+        $nbr_billet         = $request->nbr_billet ;
+        $telephone          = $request->telephone ;
+
+
+
+        if($nom == null){ return response(["error"=>"Le nom doit etre renseigné"],400);
+        }
+
+
+        if($nbr_billet == null){
+            return response(["error"=>"Le nombre de billet doit etre renseigné"],400);
+        }
+        if($billet == null){
+            return response(["error"=>"L'Id du billet doit etre renseigné"],400);
+        }
+        if($telephone == null){
+            return response(["error"=>"Le telephone doit etre renseigné"],400);
+        }
+
+
+        $get_billet  = new GetBillet();
+
+        $get_billet->nom = $nom;
+        $get_billet->billet_avions_id = $billet;
+        $get_billet->telephone = $telephone;
+
+        $billet = BilletAvion::find($billet);
+        if($billet){
+            if($billet->billet_restant >= $nbr_billet){
+                $get_billet->nbr_billet = $nbr_billet;
+                $get_billet->pu = $billet->prix;
+                $get_billet->ttc = $billet->prix * $nbr_billet ;
+
+                if($get_billet->save()){
+                    $billet->billet_restant = $billet->billet_restant - $get_billet->nbr_billet;
+                    if($billet->save()){
+                        return response(["success"=>"Le billet est crée avec succes"],200);
+                    }
+
+                }else {
+                    return response(["error"=>" Le billet n'as pas pu etre crée"],400);
+                }
+
+            }
+            return response(["error"=>" Pas assez de billet"],400);
+
+        }
+
+        return response(["error"=>" billet introuvable"],404);
     }
 
     public function chauffeurs(Request $request){
