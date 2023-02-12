@@ -17,11 +17,20 @@
 
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="libelle" class="form-label">Libelle</label>
-                        <input type="text"name ="libelle" class="form-control {{ $errors->has('libelle') ? 'is-invalid' : ''}}" id="libelle" placeholder="Veuillez saisir le libelle..."  value="{{ $trajet_avion != null ? $trajet_avion->libelle : old('libelle') }}" required>
-                        @if($errors->has('libelle'))
+                        <label for="depart" class="form-label">Depart</label>
+                        <input type="text"name ="depart" class="form-control {{ $errors->has('depart') ? 'is-invalid' : ''}}" id="depart" placeholder="Veuillez saisir le depart..."  value="{{ $trajet_avion != null ? $trajet_avion->depart : old('depart') }}" required>
+                        @if($errors->has('depart'))
                             <span class="help-block text-danger">
-                                <li>{{ $errors->first('libelle') }}</li>
+                                <li>{{ $errors->first('depart') }}</li>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="mb-3">
+                        <label for="arrivee" class="form-label">Arrive</label>
+                        <input type="text"name ="arrivee" class="form-control {{ $errors->has('arrivee') ? 'is-invalid' : ''}}" id="arrivee" placeholder="Veuillez saisir le arrivee..."  value="{{ $trajet_avion != null ? $trajet_avion->arrivee : old('arrivee') }}" required>
+                        @if($errors->has('arrivee'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('arrivee') }}</li>
                             </span>
                         @endif
                     </div>
@@ -100,8 +109,14 @@
                     checkbox: true,
                 },
                 {
-                    field: 'libelle',
-                    title: "Libellé",
+                    field: 'depart',
+                    title: "Depart",
+                    sortable: true,
+                    filterControl: "input",
+                },
+                {
+                    field: 'arrivee',
+                    title: "Arrivee",
                     sortable: true,
                     filterControl: "input",
                 },

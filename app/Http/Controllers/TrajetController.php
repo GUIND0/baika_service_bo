@@ -36,10 +36,12 @@ class TrajetController extends Controller
 
         }
         request()->validate([
-            'libelle' => 'required',
+            'depart' => 'required',
+            'arrivee' => 'required',
         ]);
 
-        $trajet->libelle = request('libelle');
+        $trajet->depart = request('depart');
+        $trajet->arrivee = request('arrivee');
 
         if($trajet->save()){
             flash()->success('Succès  !', 'Trajet enregistré avec succès');

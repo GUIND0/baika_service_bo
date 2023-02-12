@@ -34,10 +34,12 @@ class TrajetAvionController extends Controller
 
         }
         request()->validate([
-            'libelle' => 'required',
+            'depart' => 'required',
+            'arrivee' => 'required',
         ]);
 
-        $trajet_avion->libelle = request('libelle');
+        $trajet_avion->depart = request('depart');
+        $trajet_avion->arrivee = request('arrivee');
 
         if($trajet_avion->save()){
             flash()->success('Succès  !', 'Trajet Avion enregistré avec succès');

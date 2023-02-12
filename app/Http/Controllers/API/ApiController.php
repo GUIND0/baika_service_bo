@@ -43,7 +43,8 @@ class ApiController extends Controller
         $tickets = Ticket::select(
             DB::raw("tickets.*"),
             DB::raw("compagnies.libelle as compagnie"),
-            DB::raw("trajets.libelle as trajet")
+            DB::raw("trajets.depart as depart"),
+            DB::raw("trajets.arrivee as arrivee"),
             )
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
             ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
@@ -57,7 +58,8 @@ class ApiController extends Controller
         $ticket = Ticket::select(
             DB::raw("tickets.*"),
             DB::raw("compagnies.libelle as compagnie"),
-            DB::raw("trajets.libelle as trajet")
+            DB::raw("trajets.depart as depart"),
+            DB::raw("trajets.arrivee as arrivee"),
             )
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
             ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
@@ -130,7 +132,8 @@ class ApiController extends Controller
         $billets = BilletAvion::select(
             DB::raw("billet_avions.*"),
             DB::raw("compagnie_aeriennes.libelle as compagnie"),
-            DB::raw("trajet_avions.libelle as trajet")
+            DB::raw("trajet_avions.depart as depart"),
+            DB::raw("trajet_avions.arrivee as arrivee")
             )
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
             ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
@@ -144,7 +147,8 @@ class ApiController extends Controller
         $billet = BilletAvion::select(
             DB::raw("billet_avions.*"),
             DB::raw("compagnie_aeriennes.libelle as compagnie"),
-            DB::raw("trajet_avions.libelle as trajet")
+            DB::raw("trajet_avions.depart as depart"),
+            DB::raw("trajet_avions.arrivee as arrivee")
             )
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
             ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
