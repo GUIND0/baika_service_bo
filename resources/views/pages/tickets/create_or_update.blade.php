@@ -96,7 +96,7 @@
                             <select class="form-control" name="trajet" id="trajet"  style="width: 100%;">'
                                 <option value=""> --- Veuillez selectionner un trajet ---</option>
                                 @foreach($trajets as $trajet)
-                                    <option {{ $ticket != null ? $ticket->trajets_id == $trajet->id ? 'selected' : '' : old('trajet') == $trajet->id ? 'selected' : '' }} value="{{ $trajet->id }}"> {{ $trajet->libelle }}</option>
+                                    <option {{ $ticket != null ? $ticket->trajets_id == $trajet->id ? 'selected' : '' : old('trajet') == $trajet->id ? 'selected' : '' }} value="{{ $trajet->id }}"> {{ $trajet->depart }} / {{ $trajet->arrivee }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('trajet'))

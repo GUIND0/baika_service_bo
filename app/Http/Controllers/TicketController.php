@@ -32,7 +32,7 @@ class TicketController extends Controller
 
         $tickets = Ticket::select(
             DB::raw("tickets.*"),
-            DB::raw("trajets.libelle as trajet"),
+            DB::raw("CONCAT(trajets.depart,' / ',trajets.arrivee) as trajet"),
             DB::raw("compagnies.libelle as compagnie")
         )
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
@@ -102,7 +102,7 @@ class TicketController extends Controller
 
         $ticket = Ticket::select(
             DB::raw("tickets.*"),
-            DB::raw("trajets.libelle as trajet"),
+            DB::raw("CONCAT(trajets.depart,' / ',trajets.arrivee) as trajet"),
             DB::raw("compagnies.libelle as compagnie")
         )
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')

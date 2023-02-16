@@ -30,7 +30,7 @@ class BilletAvionController extends Controller
 
         $billets = BilletAvion::select(
             DB::raw("billet_avions.*"),
-            DB::raw("trajet_avions.libelle as trajet"),
+            DB::raw("CONCAT(trajet_avions.depart,' / ',trajet_avions.depart) as trajet"),
             DB::raw("compagnie_aeriennes.libelle as compagnie")
         )
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
@@ -104,7 +104,7 @@ class BilletAvionController extends Controller
 
         $billet = BilletAvion::select(
             DB::raw("billet_avions.*"),
-            DB::raw("trajet_avions.libelle as trajet"),
+            DB::raw("CONCAT(trajet_avions.depart,' / ',trajet_avions.depart) as trajet"),
             DB::raw("compagnie_aeriennes.libelle as compagnie")
         )
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')

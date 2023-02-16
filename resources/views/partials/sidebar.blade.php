@@ -45,7 +45,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ (request()->routeIs('ticket.*')) ? 'active open' : '' }}">
+        <li class="menu-item {{ (request()->routeIs('billet.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon fa fa-plane text-dark"  style="font-size:20px;"></i>
                 <div data-i18n="Analytics">Billets</div>
