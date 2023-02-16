@@ -48,6 +48,7 @@ class ApiController extends Controller
             )
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
             ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
+            ->where('tickets.ticket_restant', '>', 0)
             ->orderBy('created_at','DESC')
             ->get();
 
@@ -137,6 +138,7 @@ class ApiController extends Controller
             )
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
             ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
+            ->where('billet_avions.billet_restant', '>', 0)
             ->orderBy('created_at','DESC')
             ->get();
 
