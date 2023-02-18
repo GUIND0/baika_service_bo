@@ -40,6 +40,12 @@ class ApiController extends Controller
     }
 
     public function tickets(Request $request){
+        $page = 0 ;
+        if(request()->isMethod('get')){
+            if(request('page') && request('page') != ""){
+                $page = request('page');
+            }
+        };
         $tickets = Ticket::select(
             DB::raw("tickets.*"),
             DB::raw("compagnies.libelle as compagnie"),
@@ -50,12 +56,15 @@ class ApiController extends Controller
             ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
             ->where('tickets.ticket_restant', '>', 0)
             ->orderBy('created_at','DESC')
+            ->offset($page * 5)
+            ->limit(5)
             ->get();
 
         return $tickets->toJson();
     }
 
     public function ticket($id){
+
         $ticket = Ticket::select(
             DB::raw("tickets.*"),
             DB::raw("compagnies.libelle as compagnie"),
@@ -130,6 +139,12 @@ class ApiController extends Controller
     }
 
     public function billets(Request $request){
+        $page = 0 ;
+        if(request()->isMethod('get')){
+            if(request('page') && request('page') != ""){
+                $page = request('page');
+            }
+        };
         $billets = BilletAvion::select(
             DB::raw("billet_avions.*"),
             DB::raw("compagnie_aeriennes.libelle as compagnie"),
@@ -140,6 +155,8 @@ class ApiController extends Controller
             ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
             ->where('billet_avions.billet_restant', '>', 0)
             ->orderBy('created_at','DESC')
+            ->offset($page * 5)
+            ->limit(5)
             ->get();
 
         return $billets->toJson();
@@ -218,6 +235,13 @@ class ApiController extends Controller
     }
 
     public function chauffeurs(Request $request){
+        $page = 0 ;
+        if(request()->isMethod('get')){
+            if(request('page') && request('page') != ""){
+                $page = request('page');
+            }
+        };
+
         $chauffeurs = Chauffeur::select(
             DB::raw("chauffeurs.*"),
             DB::raw("categorie_permis.libelle as categorie_permi"),
@@ -229,12 +253,21 @@ class ApiController extends Controller
             ->leftJoin('images', 'images.chauffeurs_id', 'chauffeurs.id')
             ->where('chauffeurs.statut',1)
             ->orderBy('created_at','DESC')
+            ->offset($page * 5)
+            ->limit(5)
             ->get();
 
         return $chauffeurs->toJson();
     }
 
     public function evenements(Request $request){
+        $page = 0 ;
+        if(request()->isMethod('get')){
+            if(request('page') && request('page') != ""){
+                $page = request('page');
+            }
+        };
+
         $evenements = Evenement::select(
             DB::raw("evenements.*"),
             DB::raw("images.path as image"),
@@ -243,6 +276,8 @@ class ApiController extends Controller
             ->join('images', 'images.evenements_id', 'evenements.id')
             ->where('evenements.statut',1)
             ->orderBy('created_at','DESC')
+            ->offset($page * 5)
+            ->limit(5)
             ->get();
 
         return $evenements->toJson();
