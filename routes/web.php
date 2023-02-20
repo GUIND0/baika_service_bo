@@ -21,6 +21,7 @@ use App\Http\Controllers\DemandeAutoController;
 use App\Http\Controllers\DemandeColiController;
 use App\Http\Controllers\DemandeTaxiController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\RecrutementController;
 use App\Http\Controllers\TourismeController;
 use App\Http\Controllers\TrajetAvionController;
 use App\Http\Controllers\TypeColiController;
@@ -146,11 +147,11 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
     Route::post('automobile/store', [AutomobileController::class, 'store'])->name('automobile.store');
     Route::delete('automobile/delete/{id}', [AutomobileController::class, 'delete'])->name('automobile.delete');
 
-    // Chauffeur
-    Route::get('chauffeurs', [ChauffeurController::class, 'index'])->name('chauffeur.index');
-    Route::get('/chauffeur/{id?}', [ChauffeurController::class, 'create_or_update'])->name('chauffeur.create_or_update');
-    Route::post('chauffeur/store', [ChauffeurController::class, 'store'])->name('chauffeur.store');
-    Route::delete('chauffeur/delete/{id}', [ChauffeurController::class, 'delete'])->name('chauffeur.delete');
+    // Recutementr
+    Route::get('recrutements', [RecrutementController::class, 'index'])->name('recrutement.index');
+    Route::get('/recrutement/{id?}', [RecrutementController::class, 'create_or_update'])->name('recrutement.create_or_update');
+    Route::post('recrutement/store', [RecrutementController::class, 'store'])->name('recrutement.store');
+    Route::delete('recrutement/delete/{id}', [RecrutementController::class, 'delete'])->name('recrutement.delete');
 
     // Evenement
     Route::get('evenements', [EvenementController::class, 'index'])->name('evenement.index');

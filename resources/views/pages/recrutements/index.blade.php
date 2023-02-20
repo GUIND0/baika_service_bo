@@ -1,6 +1,6 @@
 @extends('partials.main')
 
-@section('title1')Liste des chauffeur
+@section('title1')Liste des recrutement
 @endsection
 @section('content')
 <div class="row">
@@ -9,8 +9,8 @@
         <div class="card card-box">
             <div class="card-body">
                 <div id="toolbar" class="btn-group">
-                    <a href="{{ route('chauffeur.create_or_update') }}" id="addRow" class="btn btn-outline-success">
-                        <i class="fa fa-plus"></i> Nouveau chauffeur
+                    <a href="{{ route('recrutement.create_or_update') }}" id="addRow" class="btn btn-outline-success">
+                        <i class="fa fa-plus"></i> Nouveau recrutement
                     </a>
                 </div>
                 <div class="table-responsive table-scrollable">
@@ -30,7 +30,7 @@
 <script>
 
         $('#table-javascript').bootstrapTable({
-            data: @json($chauffeurs),
+            data: @json($recrutements),
             toolbar: "#toolbar",
             cache: false,
             striped: true,
@@ -90,12 +90,6 @@
                     filterControl: "input",
                 },
                 {
-                    field: 'categorie_permi',
-                    title: "Categorie Permi",
-                    sortable: true,
-                    filterControl: "input",
-                },
-                {
                     field: 'statut',
                     title: "Statut",
                     sortable: true,
@@ -116,11 +110,11 @@
         });
 
         function actionsFormatter(value, row, index) {
-            return `<form action="{{ route('chauffeur.delete', '')}}/${value}" method="POST">
+            return `<form action="{{ route('recrutement.delete', '')}}/${value}" method="POST">
                     @csrf
                     @method('DELETE')
                     <div class="btn-group" role="group">
-                        <a href="{{ route('chauffeur.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
+                        <a href="{{ route('recrutement.create_or_update')}}/${value}" class="btn btn-outline-dark waves-effect" data-toggle="tooltip" title="Modifier">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" type="button" class="deleteBtn btn btn-outline-danger waves-effect" data-id="${value}" title="Supprimer">
@@ -170,7 +164,7 @@
                         }
                     });
                     $.ajax({
-                        url: "{{route('chauffeur.delete','')}}/"+id,
+                        url: "{{route('recrutement.delete','')}}/"+id,
                         type: 'DELETE',
                         success: function(result) {
                             if(result == 'done'){
@@ -180,8 +174,8 @@
                                  Swal.fire({
                                     position: 'top',
                                     icon: 'success',
-                                    title: 'Suppression de l\'chauffeur',
-                                    text: 'chauffeur supprimé avec succes !',
+                                    title: 'Suppression de l\'recrutement',
+                                    text: 'recrutement supprimé avec succes !',
                                     showConfirmButton: false,
                                     timer: 1500
                                 });

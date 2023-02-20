@@ -28,7 +28,7 @@ Route::get('/evenements', [ApiController::class, 'evenements']);
 // Single evenement
 Route::get('/evenement/{evenement_id}', [ApiController::class, 'evenement']);
 //Chauffeur
-Route::get('/chauffeurs', [ApiController::class, 'chauffeurs']);
+Route::get('/recrutements', [ApiController::class, 'recrutements']);
 
 //all location
 Route::get('/locations', [ApiController::class, 'locations']);
@@ -65,6 +65,9 @@ Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
 Route::get('/billets', [ApiController::class, 'billets']);
 // Single billet
 Route::get('/billet/{billet_id}', [ApiController::class, 'billet']);
+
+
+Route::post('/create-recrutement', [ApiController::class, 'create_recrutement']);
 
 
 

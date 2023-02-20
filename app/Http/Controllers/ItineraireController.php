@@ -20,10 +20,10 @@ class ItineraireController extends Controller
         }
         $itineraires = Itineraire::select(
             DB::raw('itineraires.*'),
-            DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
-            DB::raw("chauffeurs.telephone as telephone"),
+
+
             )
-            ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
+
             ->orderByDesc('itineraires.created_at')
             ->get();
 
@@ -33,9 +33,9 @@ class ItineraireController extends Controller
 
             return $item;
         });
-        $chauffeurs = Chauffeur::all();
+
         $quartiers = Quartier::all();
-        return view('pages.itineraires.index', compact('chauffeurs','quartiers','itineraire','itineraires'));
+        return view('pages.itineraires.index', compact('quartiers','itineraire','itineraires'));
     }
 
     public function store(Request $request){
@@ -59,7 +59,7 @@ class ItineraireController extends Controller
         $itineraire->quartiers_id1 = request('arrive');
         $itineraire->prix_min = str_replace(' ', '',  request('prix_min'));
         $itineraire->prix_max = str_replace(' ', '',  request('prix_max'));
-        $itineraire->chauffeurs_id = request('chauffeur');
+        $itineraire->chauffeur = request('chauffeur');
 
         if($itineraire->save()){
             flash()->success('Succès  !', 'Itineraire enregistré avec succès');

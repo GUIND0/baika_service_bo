@@ -20,7 +20,7 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="prix_min" class="form-label">Prix Min</label>
-                                <input type="text" id="prix_min" name ="prix_min" class="form-control prix_min {{ $errors->has('prix_min') ? 'is-invalid' : ''}}" id="prix_min" placeholder="Veuillez saisir le prix min..."  value="{{ $itineraire != null ? $itineraire->prix_min : old('prix_min') }}" required>
+                                <input type="number" id="prix_min" name ="prix_min" class="form-control prix_min {{ $errors->has('prix_min') ? 'is-invalid' : ''}}" id="prix_min" placeholder="Veuillez saisir le prix min..."  value="{{ $itineraire != null ? $itineraire->prix_min : old('prix_min') }}" required>
                                 @if($errors->has('prix_min'))
                                     <span class="help-block text-danger">
                                         <li>{{ $errors->first('prix_min') }}</li>
@@ -31,7 +31,7 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="prix_max" class="form-label">Prix Max</label>
-                                <input type="text" id="prix_max" name ="prix_max" class="form-control prix_max {{ $errors->has('prix_max') ? 'is-invalid' : ''}}" id="prix_max" placeholder="Veuillez saisir le prix max..."  value="{{ $itineraire != null ? $itineraire->prix_max : old('prix_max') }}" required>
+                                <input type="number" id="prix_max" name ="prix_max" class="form-control prix_max {{ $errors->has('prix_max') ? 'is-invalid' : ''}}" id="prix_max" placeholder="Veuillez saisir le prix max..."  value="{{ $itineraire != null ? $itineraire->prix_max : old('prix_max') }}" required>
                                 @if($errors->has('prix_max'))
                                     <span class="help-block text-danger">
                                         <li>{{ $errors->first('prix_max') }}</li>
@@ -73,17 +73,12 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="md-3">
-                                <label class="form-label">Chauffeur</label><span class="text-danger"> *</span>
-                                <select class="form-control" name="chauffeur" id="chauffeur"  style="width: 100%;">
-                                    <option value=""> --- Veuillez selectionner un chauffeur ---</option>
-                                    @foreach($chauffeurs as $chauffeur)
-                                        <option {{ $itineraire != null ? $itineraire->chauffeur_id == $chauffeur->id ? 'selected' : '' : old('chauffeur') == $chauffeur->id ? 'selected' : '' }} value="{{ $chauffeur->id }}"> {{ $chauffeur->nom }} {{ $chauffeur->prenom }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="mb-3">
+                                <label for="chauffeur" class="form-label">Nom du Chauffeur</label>
+                                <input type="text" id="chauffeur" name ="chauffeur" class="form-control chauffeur {{ $errors->has('chauffeur') ? 'is-invalid' : ''}}" id="chauffeur" placeholder="Veuillez saisir le prix max..."  value="{{ $itineraire != null ? $itineraire->chauffeur : old('chauffeur') }}" required>
                                 @if($errors->has('chauffeur'))
                                     <span class="help-block text-danger">
-                                        <ul role="alert"><li>{{ $errors->first('chauffeur') }}</li></ul>
+                                        <li>{{ $errors->first('chauffeur') }}</li>
                                     </span>
                                 @endif
                             </div>

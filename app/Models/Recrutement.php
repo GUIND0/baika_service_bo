@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 
-class Chauffeur extends Model
+class Recrutement extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';

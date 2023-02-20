@@ -152,19 +152,19 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ (request()->routeIs('chauffeur.*')) ? 'active open' : '' }}">
+        <li class="menu-item {{ (request()->routeIs('recrutement.*')) ? 'active open' : '' }}">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon fa fa-users text-dark" style="font-size:20px;"></i>
-                <div data-i18n="Analytics">Chauffeur</div>
+                <div data-i18n="Analytics">Recrutement</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ (request()->routeIs('chauffeur.index')) ? 'active' : '' }}">
-                    <a href="{{ route('chauffeur.index') }}" class="menu-link">
+                <li class="menu-item {{ (request()->routeIs('recrutement.index')) ? 'active' : '' }}">
+                    <a href="{{ route('recrutement.index') }}" class="menu-link">
                         <div data-i18n="Perfect Scrollbar">Liste</div>
                     </a>
                 </li>
-                <li class="menu-item {{ (request()->routeIs('chauffeur.create_or_update')) ? 'active' : '' }}">
-                    <a href="{{ route('chauffeur.create_or_update') }}" class="menu-link">
+                <li class="menu-item {{ (request()->routeIs('recrutement.create_or_update')) ? 'active' : '' }}">
+                    <a href="{{ route('recrutement.create_or_update') }}" class="menu-link">
                         <div data-i18n="Text Divider">Nouveau</div>
                     </a>
                 </li>

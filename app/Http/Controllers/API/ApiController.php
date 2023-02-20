@@ -5,18 +5,19 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Automobile;
 use App\Models\BilletAvion;
-use App\Models\Chauffeur;
 use App\Models\DemandeColi;
 use App\Models\DemandeTaxi;
 use App\Models\Evenement;
 use App\Models\GetAutomobile;
 use App\Models\GetBillet;
 use App\Models\GetEvenementTicket;
+use App\Models\GetRecrutement;
 use App\Models\GetTicket;
 use App\Models\Image;
 use App\Models\Itineraire;
 use App\Models\Location;
 use App\Models\Quartier;
+use App\Models\Recrutement;
 use App\Models\Ticket;
 use App\Models\Tourisme;
 use App\Models\TypeColi;
@@ -234,7 +235,7 @@ class ApiController extends Controller
         return response(["error"=>" billet introuvable"],404);
     }
 
-    public function chauffeurs(Request $request){
+    public function recrutements(Request $request){
         $page = 0 ;
         if(request()->isMethod('get')){
             if(request('page') && request('page') != ""){
@@ -242,22 +243,19 @@ class ApiController extends Controller
             }
         };
 
-        $chauffeurs = Chauffeur::select(
-            DB::raw("chauffeurs.*"),
-            DB::raw("categorie_permis.libelle as categorie_permi"),
-            DB::raw("cvs.path as cv"),
+        $recrutements = Recrutement::select(
+            DB::raw("recrutements.*"),
             DB::raw("images.path as image")
             )
-            ->join('categorie_permis', 'categorie_permis.id', 'chauffeurs.categorie_permis_id')
-            ->leftJoin('cvs', 'cvs.chauffeurs_id', 'chauffeurs.id')
-            ->leftJoin('images', 'images.chauffeurs_id', 'chauffeurs.id')
-            ->where('chauffeurs.statut',1)
+
+            ->leftJoin('images', 'images.recrutements_id', 'recrutements.id')
+            ->where('recrutements.statut',1)
             ->orderBy('created_at','DESC')
             ->offset($page * 5)
             ->limit(5)
             ->get();
 
-        return $chauffeurs->toJson();
+        return $recrutements->toJson();
     }
 
     public function evenements(Request $request){
@@ -470,6 +468,41 @@ class ApiController extends Controller
         }
 
     }
+
+    public function create_recrutement(Request $request){
+        $nom                = $request->nom ;
+        $recrutement        = $request->recrutement ;
+        $telephone          = $request->telephone ;
+
+        if($nom == null){
+            return response(["error"=>"Le nom doit etre renseigné"],400);
+        }
+        if($recrutement == null){
+            return response(["error"=>"Id doit etre renseigné"],400);
+        }
+        if($telephone == null){
+            return response(["error"=>"Le telephone doit etre renseigné"],400);
+        }
+
+        $recrutementVerif = Recrutement::find($recrutement);
+        if(!$recrutementVerif){
+            return response(["error"=>" recrutement Introuvable"],404);
+        }
+        $get_recrutement  = new GetRecrutement();
+
+        $get_recrutement->nom = $nom;
+        $get_recrutement->recrutements_id = $recrutement;
+        $get_recrutement->telephone = $telephone;
+        $get_recrutement->etat = 'encours';
+
+        if( $get_recrutement->save()){
+            return response(["success"=>" Recrutement est crée avec succes"],200);
+        }else {
+            return response(["error"=>" Recrutement n'as pas pu etre crée"],400);
+        }
+
+    }
+
     public function create_demande_colis(Request $request){
 
 
@@ -531,19 +564,19 @@ class ApiController extends Controller
 
         $itineraire = Itineraire::select(
             DB::raw('itineraires.*'),
-            DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
-            DB::raw("chauffeurs.telephone as telephone"),
+            DB::raw("CONCAT(recrutements.nom,' ',recrutements.prenom) as chauffeur"),
+            DB::raw("recrutements.telephone as telephone"),
             )
-            ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
+            ->leftJoin('recrutements','recrutements.id','itineraires.recrutements_id')
             ->where('quartiers_id',$depart_id)->where('quartiers_id1',$arrive_id)->first();
 
         if($itineraire == null){
             $itineraire = Itineraire::select(
                 DB::raw('itineraires.*'),
-                DB::raw("CONCAT(chauffeurs.nom,' ',chauffeurs.prenom) as chauffeur"),
-                DB::raw("chauffeurs.telephone as telephone"),
+                DB::raw("CONCAT(recrutements.nom,' ',recrutements.prenom) as chauffeur"),
+                DB::raw("recrutements.telephone as telephone"),
                 )
-                ->leftJoin('chauffeurs','chauffeurs.id','itineraires.chauffeurs_id')
+                ->leftJoin('recrutements','recrutements.id','itineraires.recrutements_id')
                 ->where('quartiers_id1',$depart_id)->where('quartiers_id',$arrive_id)->first();
 
 
