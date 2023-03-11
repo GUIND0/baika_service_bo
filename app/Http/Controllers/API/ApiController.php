@@ -2,29 +2,55 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Models\Image;
+use App\Models\Notif;
+use App\Models\Retour;
+use App\Models\Ticket;
+use App\Models\Location;
+use App\Models\Quartier;
+use App\Models\Tourisme;
+use App\Models\TypeColi;
+use App\Models\Evenement;
+use App\Models\GetBillet;
+use App\Models\GetTicket;
+use App\Models\Annulation;
 use App\Models\Automobile;
+use App\Models\Itineraire;
 use App\Models\BilletAvion;
 use App\Models\DemandeColi;
 use App\Models\DemandeTaxi;
-use App\Models\Evenement;
-use App\Models\GetAutomobile;
-use App\Models\GetBillet;
-use App\Models\GetEvenementTicket;
-use App\Models\GetRecrutement;
-use App\Models\GetTicket;
-use App\Models\Image;
-use App\Models\Itineraire;
-use App\Models\Location;
-use App\Models\Quartier;
 use App\Models\Recrutement;
-use App\Models\Ticket;
-use App\Models\Tourisme;
-use App\Models\TypeColi;
 use Illuminate\Http\Request;
+use App\Models\GetAutomobile;
+use App\Models\GetRecrutement;
+use App\Models\GetEvenementTicket;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
 class ApiController extends Controller
 {
+
+    public function om_return(Request $request){
+        $string = implode(",",$request);
+        $retour = new Retour();
+        $retour->contenu = $string;
+        $retour->save();
+    }
+
+    public function om_cancel(Request $request){
+        $string = implode(",",$request);
+        $retour = new Annulation();
+        $retour->contenu = $string;
+        $retour->save();
+    }
+
+
+    public function om_notif(Request $request){
+        $string = implode(",",$request);
+        $retour = new Notif();
+        $retour->contenu = $string;
+        $retour->save();
+    }
 
     public function automobiles(Request $request){
         $automobiles = Automobile::select(
