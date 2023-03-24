@@ -27,6 +27,7 @@ use App\Models\GetEvenementTicket;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
+
 class ApiController extends Controller
 {
 
@@ -35,6 +36,7 @@ class ApiController extends Controller
         $retour = new Retour();
         $retour->contenu = $string;
         $retour->save();
+        return response()->json($retour,200);
     }
 
     public function om_cancel(Request $request){
