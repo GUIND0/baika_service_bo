@@ -32,7 +32,7 @@ class ApiController extends Controller
 {
 
     public function om_return(Request $request){
-        $string = implode(",",$request);
+        $string = implode(",",(array)$request);
         $retour = new Retour();
         $retour->contenu = $string;
         $retour->save();
