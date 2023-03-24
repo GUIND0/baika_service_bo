@@ -43,17 +43,26 @@ class ApiController extends Controller
     }
 
     public function om_cancel(Request $request){
-        $string = implode(",",$request);
+
+        $cles = implode(",",collect($request->all())->keys()->toArray());
+        $valeurs = implode(",",$request->all());
         $retour = new Annulation();
-        $retour->contenu = $string;
+        $retour->contenu = "";
+        $retour->cles = $cles;
+        $retour->valeurs = $valeurs;
         $retour->save();
+        return response()->json($retour,200);
     }
 
 
     public function om_notif(Request $request){
-        $string = implode(",",$request);
+
+        $cles = implode(",",collect($request->all())->keys()->toArray());
+        $valeurs = implode(",",$request->all());
         $retour = new Notif();
-        $retour->contenu = $string;
+        $retour->contenu = "";
+        $retour->cles = $cles;
+        $retour->valeurs = $valeurs;
         $retour->save();
     }
 
