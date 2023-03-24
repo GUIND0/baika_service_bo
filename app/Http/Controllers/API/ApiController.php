@@ -32,7 +32,7 @@ class ApiController extends Controller
 {
 
     public function om_return(Request $request){
-        $cles = implode(",",collect($request->all())->keys());
+        $cles = implode(",",collect($request->all())->keys()->toArray());
         $valeurs = implode(",",$request->all());
         $retour = new Retour();
         $retour->cles = $cles;
