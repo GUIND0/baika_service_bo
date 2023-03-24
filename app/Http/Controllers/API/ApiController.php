@@ -35,6 +35,7 @@ class ApiController extends Controller
         $cles = implode(",",collect($request->all())->keys()->toArray());
         $valeurs = implode(",",$request->all());
         $retour = new Retour();
+        $retour->contenu = "";
         $retour->cles = $cles;
         $retour->valeurs = $valeurs;
         $retour->save();
