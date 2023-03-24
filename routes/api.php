@@ -20,6 +20,10 @@ Route::post('/om/return', [ApiController::class, 'om_return']);
 Route::post('/om/cancel', [ApiController::class, 'om_cancel']);
 Route::post('/om/notif', [ApiController::class, 'om_notif']);
 
+Route::get('/toto',function(Request $request){
+    dd($request);
+});
+
 // All automobile
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
 // Single automobile
