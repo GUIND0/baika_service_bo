@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // OM
-Route::post('/return', [ApiController::class, 'om_return']);
-Route::post('/cancel', [ApiController::class, 'om_cancel']);
-Route::post('/notif', [ApiController::class, 'om_notif']);
+Route::post('/om/return', [ApiController::class, 'om_return']);
+Route::post('/om/cancel', [ApiController::class, 'om_cancel']);
+Route::post('/om/notif', [ApiController::class, 'om_notif']);
 
 // All automobile
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
