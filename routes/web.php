@@ -205,7 +205,7 @@ Route::group(['prefix' => 'api'], function ($router) {
     
 Route::post('/om/return', [ApiController::class, 'om_return']);
 Route::post('/om/cancel', [ApiController::class, 'om_cancel']);
-Route::post('/om/notif', [ApiController::class, 'om_notif']);
+Route::post('/om/notif', [ApiController::class, 'om_notif'])->name("om.notif");
 
 Route::get('/toto',function(Request $request){
     dd($request);
