@@ -116,7 +116,48 @@
                         </div>
                     </div>
 
-                    <div class="divider divider-dark">
+                    <div class="mb-3 col-md-4">
+                        <label for="carburant" class="control-label">Carburant</label><span class="text-danger"> *</span>
+                        <select class="form-select {{ $errors->has('carburant') ? 'is-invalid' : ''}}" id="carburant" name="carburant" aria-label="Default select example" aria-placeholder="Choisir carburant ..." required>
+                            <option value=""> -- Moteur -- </option>
+                            <option value="Essence" {{ ($location != null ? $location->carburant == 'Essence' : old('carburant')) == "Essence" ? 'selected' : '' }}>Essence</option>
+                            <option value="Gazoil" {{ ($location != null ? $location->carburant == 'Gazoil' : old('carburant')) == "Gazoil" ? 'selected' : '' }}>Gazoil</option>
+                        </select>
+                        @if($errors->has('carburant'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('carburant') }}</li>
+                            </span>
+
+                        @endif
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <input type="text"  name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                    value="{{ $location != null ? $location->description : old('description') }}" placeholder="description" />
+                            @if($errors->has('description'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('description') }}</li>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Couleur Exterieure <span class="text-danger"> *</span></label>
+                            <input type="text" min="1" max="3" name="couleur_exterieure" class="form-control {{ $errors->has('couleur_exterieure') ? 'is-invalid' : '' }}"
+                                    value="{{ $location != null ? $location->couleur_exterieure : old('couleur_exterieure') }}" placeholder="Couleur exterieure" required/>
+                            @if($errors->has('couleur_exterieure'))
+                            <span class="help-block text-danger">
+                                <li>{{ $errors->first('couleur_exterieure') }}</li>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    {{-- <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Interieure</div>
                     </div>
                     <div class="mb-3 col-md-3">
@@ -186,18 +227,7 @@
                     <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Exterieure</div>
                     </div>
-                    <div class="mb-3 col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Description</label>
-                            <input type="text"  name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                    value="{{ $location != null ? $location->description : old('description') }}" placeholder="description" />
-                            @if($errors->has('description'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('description') }}</li>
-                            </span>
-                            @endif
-                        </div>
-                    </div>
+
                     <div class="mb-3 col-md-3">
                         <div class="form-group">
                             <label class="control-label">Categorie</label>
@@ -224,37 +254,13 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Couleur Exterieure <span class="text-danger"> *</span></label>
-                            <input type="text" min="1" max="3" name="couleur_exterieure" class="form-control {{ $errors->has('couleur_exterieure') ? 'is-invalid' : '' }}"
-                                    value="{{ $location != null ? $location->couleur_exterieure : old('couleur_exterieure') }}" placeholder="Couleur exterieure" required/>
-                            @if($errors->has('couleur_exterieure'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('couleur_exterieure') }}</li>
-                            </span>
-                            @endif
-                        </div>
-                    </div>
+
 
                     <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Moteur</div>
                     </div>
 
-                    <div class="mb-3 col-md-4">
-                        <label for="carburant" class="control-label">Carburant</label><span class="text-danger"> *</span>
-                        <select class="form-select {{ $errors->has('carburant') ? 'is-invalid' : ''}}" id="carburant" name="carburant" aria-label="Default select example" aria-placeholder="Choisir carburant ..." required>
-                            <option value=""> -- Moteur -- </option>
-                            <option value="Essence" {{ ($location != null ? $location->carburant == 'Essence' : old('carburant')) == "Essence" ? 'selected' : '' }}>Essence</option>
-                            <option value="Gazoil" {{ ($location != null ? $location->carburant == 'Gazoil' : old('carburant')) == "Gazoil" ? 'selected' : '' }}>Gazoil</option>
-                        </select>
-                        @if($errors->has('carburant'))
-                            <span class="help-block text-danger">
-                                <li>{{ $errors->first('carburant') }}</li>
-                            </span>
 
-                        @endif
-                    </div>
 
                     <div class="mb-3 col-md-4">
                         <div class="form-group">
@@ -320,7 +326,7 @@
                             </span>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="divider divider-dark">
                         <div class="divider-text" style="font-size: 28px">Images</div>
                     </div>

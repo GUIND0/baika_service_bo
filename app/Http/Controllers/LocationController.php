@@ -54,7 +54,7 @@ class LocationController extends Controller
                 'carburant' => ['required'],
                 'couleur_exterieure' => ['required'],
                 'type_location' => ['required'],
-                'nbre_porte' => ['required'],
+                //'nbre_porte' => ['required'],
                 'prix' => ['required'],
                 'images' => ['required'],
 
@@ -67,36 +67,37 @@ class LocationController extends Controller
                 'carburant' => ['required'],
                 'couleur_exterieure' => ['required'],
                 'type_location' => ['required'],
-                'nbre_porte' => ['required'],
+              //  'nbre_porte' => ['required'],
                 'prix' => ['required'],
                 'images' => ['required'],
             ]);
             $location = new location();
         }
 
+        $location->description = request('description');
+        $location->prix = str_replace(' ', '',  request('prix'));
         $location->modele = request('modele');
         $location->etat = request('etat');
         $location->version = request('version');
         $location->annee = request('annee');
-        $location->modele = request('modele');
         $location->carburant = request('carburant');
-        $location->transmission = request('transmission');
-        $location->salon = request('salon');
-        $location->moteur = request('moteur');
-        $location->carrosserie = request('carrosserie');
-        $location->vitesse = request('vitesse');
-        $location->puissance = request('puissance');
-        $location->cylindre = request('cylindre');
-        $location->consommation = request('consommation');
-        $location->nbre_portes = request('nbre_porte');
-        $location->nbre_sieges = request('nbre_siege');
         $location->couleur_exterieure = request('couleur_exterieure');
-        $location->couleur_interieure = request('couleur_interieure');
-        $location->description = request('description');
-        $location->prix = str_replace(' ', '',  request('prix'));
-        $location->categorie = request('categorie');
         $location->type_locations_id = request('type_location');
         $location->statut = request('statut');
+
+        $location->transmission ='';
+        $location->salon = '';
+        $location->moteur ='';
+        $location->carrosserie = '';
+        $location->vitesse = '';
+        $location->puissance ='';
+        $location->cylindre = '';
+        $location->consommation = '';
+        $location->nbre_portes ='';
+        $location->nbre_sieges ='';
+        $location->couleur_interieure ='';
+        $location->categorie = '';
+
 
 
        $images = request('images');

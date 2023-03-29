@@ -8,14 +8,14 @@
     <div class="col-md-6">
         <div class="accordion mt-3" id="accordionExample">
             {{-- General  --}}
-            <div class="card accordion-item shadow-none bg-transparent border border-warning mb-3 active">
+            <div class="card accordion-item shadow-none bg-transparent border border-warning mb-3 active" >
               <h2 class="accordion-header" id="headingOne">
-                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
+                <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne" disabled>
                   Generale
                 </button>
               </h2>
 
-              <div id="accordionOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample" style="">
+              <div id="accordionOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample" style="">
                 <div class="accordion-body m-2">
                     <div class="row">
                         <div class="col-md-6">
@@ -77,17 +77,6 @@
                             <h5>{{ $location->annee }}</h5>
                         </div>
                     </div>
-                </div>
-              </div>
-            </div>
-            <div class="card accordion-item shadow-none bg-transparent border border-success mb-3">
-              <h2 class="accordion-header" id="headingTwo">
-                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
-                  Exterieure
-                </button>
-              </h2>
-              <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
-                <div class="accordion-body">
                     <div class="row">
                         <div class="col-md-6">
                             <h5>Description :</h5>
@@ -96,6 +85,34 @@
                             <h5>{{ $location->description }}</h5>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Couleure Exterieure :</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>{{ $location->couleur_exterieure }}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Carburant :</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>{{ $location->carburant }}</h5>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            {{-- <div class="card accordion-item shadow-none bg-transparent border border-success mb-3">
+              <h2 class="accordion-header" id="headingTwo">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                  Exterieure
+                </button>
+              </h2>
+              <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                <div class="accordion-body">
+
                     <div class="row">
                         <div class="col-md-6">
                             <h5>Categorie :</h5>
@@ -112,14 +129,7 @@
                             <h5>{{ $location->carrosserie }}</h5>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Couleure Exterieure :</h5>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>{{ $location->couleur_exterieure }}</h5>
-                        </div>
-                    </div>
+
                 </div>
               </div>
             </div>
@@ -182,14 +192,7 @@
                 </h2>
                 <div id="accordionFour" class="accordion-collapse collapse " aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
                   <div class="accordion-body">
-                      <div class="row">
-                          <div class="col-md-6">
-                              <h5>Carburant :</h5>
-                          </div>
-                          <div class="col-md-6">
-                              <h5>{{ $location->carburant }}</h5>
-                          </div>
-                      </div>
+
                       <div class="row">
                           <div class="col-md-6">
                               <h5>Moteur :</h5>
@@ -233,7 +236,8 @@
                   </div>
                 </div>
               </div>
-          </div>
+          </div> --}}
+    </div>
     </div>
     <!-- Bootstrap crossfade carousel -->
     <div class="col-md-6">

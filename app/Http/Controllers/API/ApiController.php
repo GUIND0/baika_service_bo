@@ -96,6 +96,10 @@ class ApiController extends Controller
             ->join('compagnies', 'compagnies.id', 'tickets.compagnies_id')
             ->leftJoin('trajets', 'trajets.id', 'tickets.trajets_id')
             ->where('tickets.ticket_restant', '>', 0)
+            ->Where(function($query) {
+                $query->whereDate('tickets.date_depart','>=',date('Y-m-d'))
+                ->whereTime('tickets.heure_depart', '>=',date('H:i:s'));
+            })
             ->orderBy('created_at','DESC')
             ->offset($page * 5)
             ->limit(5)
@@ -195,6 +199,10 @@ class ApiController extends Controller
             ->join('compagnie_aeriennes', 'compagnie_aeriennes.id', 'billet_avions.compagnie_aeriennes_id')
             ->leftJoin('trajet_avions', 'trajet_avions.id', 'billet_avions.trajet_avions_id')
             ->where('billet_avions.billet_restant', '>', 0)
+            ->Where(function($query) {
+                $query->whereDate('billet_avions.date_depart','>=',date('Y-m-d'))
+                ->whereTime('billet_avions.heure_depart', '>=',date('H:i:s'));
+            })
             ->orderBy('created_at','DESC')
             ->offset($page * 5)
             ->limit(5)
@@ -306,6 +314,7 @@ class ApiController extends Controller
             }
         };
 
+
         $evenements = Evenement::select(
             DB::raw("evenements.*"),
             DB::raw("images.path as image"),
@@ -313,6 +322,10 @@ class ApiController extends Controller
             )
             ->join('images', 'images.evenements_id', 'evenements.id')
             ->where('evenements.statut',1)
+            ->Where(function($query) {
+                $query->whereDate('evenements.date','>=',date('Y-m-d'))
+                ->whereTime('evenements.heure', '>=',date('H:i:s'));
+            })
             ->orderBy('created_at','DESC')
             ->offset($page * 5)
             ->limit(5)

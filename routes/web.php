@@ -27,6 +27,7 @@ use App\Http\Controllers\TrajetAvionController;
 use App\Http\Controllers\TypeLocationController;
 use App\Http\Controllers\CategoriePermiController;
 use App\Http\Controllers\CompagnieAerienneController;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +50,14 @@ Route::post('/mot-de-passe-oublie', [UserController::class, 'motDePasseSend'])->
 Route::get('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseLien'])->name('mot_de_passe.lien');
 Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseChange'])->name('mot_de_passe.change');
 
+Route::get('/',[SiteController::class,'index'])->name('site.index');
+Route::get('/apropos',[SiteController::class,'about'])->name('site.about');
+Route::get('/contact',[SiteController::class,'contact'])->name('site.contact');
+Route::get('/domaine',[SiteController::class,'domaine'])->name('site.domaine');
+
  Route::middleware(['permission','XSS'])->group(function () {
 
-    Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 
     //User
     Route::post('/reset', [UserController::class, 'reset'])->name('user.reset');
@@ -202,14 +208,14 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
  });
 
 Route::group(['prefix' => 'api'], function ($router) {
-    
+
 Route::post('/om/return', [ApiController::class, 'om_return']);
 Route::post('/om/cancel', [ApiController::class, 'om_cancel']);
 Route::post('/om/notif', [ApiController::class, 'om_notif'])->name("om.notif");
 
-Route::get('/toto',function(Request $request){
-    dd($request);
-});
+// Route::get('/toto',function(Request $request){
+//     dd($request);
+// });
 
 // All automobile
 Route::get('/automobiles', [ApiController::class, 'automobiles']);
