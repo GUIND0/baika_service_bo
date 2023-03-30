@@ -39,6 +39,11 @@ use App\Http\Controllers\SiteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',[SiteController::class,'index'])->name('site.index');
+Route::get('/apropos',[SiteController::class,'about'])->name('site.about');
+Route::get('/contact',[SiteController::class,'contact'])->name('site.contact');
+Route::get('/domaine',[SiteController::class,'domaine'])->name('site.domaine');
+
 // Route Authentication Pages
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'connexion'])->name('connexion');
@@ -50,10 +55,7 @@ Route::post('/mot-de-passe-oublie', [UserController::class, 'motDePasseSend'])->
 Route::get('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseLien'])->name('mot_de_passe.lien');
 Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseChange'])->name('mot_de_passe.change');
 
-Route::get('/',[SiteController::class,'index'])->name('site.index');
-Route::get('/apropos',[SiteController::class,'about'])->name('site.about');
-Route::get('/contact',[SiteController::class,'contact'])->name('site.contact');
-Route::get('/domaine',[SiteController::class,'domaine'])->name('site.domaine');
+
 
  Route::middleware(['permission','XSS'])->group(function () {
 

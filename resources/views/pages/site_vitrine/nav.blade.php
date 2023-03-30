@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
             <a href="{{ route('site.index') }}" class="nav-item nav-link active">Accueil</a>
-            {{-- <a href="{{  route('site.about')  }}" class="nav-item nav-link">A propos</a> --}}
+            <a href="{{  route('login')  }}" class="nav-item nav-link">Admin</a>
             {{-- <a href="{{  route('site.domaine')  }}" class="nav-item nav-link">Domaine</a> --}}
             {{-- <a href="{{  route('site.contact')  }}" class="nav-item nav-link">Contact</a> --}}
         </div>
