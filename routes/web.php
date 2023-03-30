@@ -209,7 +209,7 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
      Route::get('billet/show/{id}', [BilletAvionController::class, 'show'])->name('billet.show');
  });
 
-Route::group(['prefix' => 'api'], function ($router) {
+Route::group(['prefix' => 'bko'], function ($router) {
 
 Route::post('/om/return', [ApiController::class, 'om_return']);
 Route::post('/om/cancel', [ApiController::class, 'om_cancel']);
