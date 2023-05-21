@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActualiteController;
 use App\Models\CompagnieAerienne;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -85,6 +86,11 @@ Route::post('/mot-de-passe-oublie/{token}', [UserController::class, 'motDePasseC
     Route::get('/compagnie/{compagnie_id?}', [CompagnieController::class, 'index'])->name('compagnie.index');
     Route::post('/compagnie/store', [CompagnieController::class, 'store'])->name('compagnie.store');
     Route::delete('/compagnie/delete/{id}', [CompagnieController::class, 'delete'])->name('compagnie.delete');
+
+    // actualite
+    Route::get('/actualite', [ActualiteController::class, 'index'])->name('actualite.index');
+    Route::post('/actualite/store', [ActualiteController::class, 'store'])->name('actualite.store');
+    Route::delete('/actualite/delete/{id}', [ActualiteController::class, 'delete'])->name('actualite.delete');
 
     // trajet
     Route::get('/trajet/{trajet_id?}', [ TrajetController::class, 'index'])->name('trajet.index');
@@ -267,6 +273,10 @@ Route::get('/get_prix/{id}/{id1}', [ApiController::class, 'get_prix']);
 
 //Billets
 Route::get('/billets', [ApiController::class, 'billets']);
+
+//Actualite
+Route::get('/actualite', [ApiController::class, 'actualite']);
+
 // Single billet
 Route::get('/billet/{billet_id}', [ApiController::class, 'billet']);
 

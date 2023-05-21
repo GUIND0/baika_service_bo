@@ -26,7 +26,7 @@ use App\Models\GetRecrutement;
 use App\Models\GetEvenementTicket;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use App\Models\Actualite;
 
 class ApiController extends Controller
 {
@@ -388,6 +388,16 @@ class ApiController extends Controller
             ->first()->makeHidden(['created_at','updated_at']);
 
         return $evenement->toJson();
+    }
+
+    public function actualite(){
+
+        $actualite = Actualite::select(
+            DB::raw("actualites.id as id"),
+            DB::raw("actualites.image as image")
+            )->get();
+
+        return $actualite->toJson();
     }
 
 

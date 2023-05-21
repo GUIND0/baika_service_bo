@@ -21,20 +21,22 @@
             <div class="container-xxl py-5 bg-primary hero-header mb-5">
                 <div class="container my-5 py-5 px-lg-5">
                     <div class="row g-5">
-                        <div class="col-lg-6 pt-5 text-center text-lg-start">
+                        <div class="col-lg-8 pt-5 text-center text-lg-start">
                             <h1 class="display-4 text-white mb-4 animated slideInLeft">La plateforme ideale pour vous simplifier la vie</h1>
                             <p class="text-white animated slideInLeft">BEKST-EXPRESS est une plateforme digitale mise en place pour vous permettre de faire vos achats de billets d'avion ,tickets transports, faire une location et la livraison de vos colis en quelque clic .</p>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-5">
                                      <a href="https://play.google.com/store/apps/details?id=com.bekst.app&hl=fr&gl=US" target="_blank"><img class="img-fluid animated zoomIn" width="100%;"  src="{{ url('site/img/store.png')}}" alt=""></a>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-5">
                                     <a href="https://play.google.com/store/apps/details?id=com.bekst.app&hl=fr&gl=US" target="_blank"><img class="img-fluid animated zoomIn"   width="90%;" src="{{ url('site/img/AppStore.png')}}" alt=""></a>
+                                </div>
+                                <div class="col-2">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 text-center text-lg-start">
-                           <img class="img-fluid animated zoomIn" src="{{ url('site/img/hero.png')}}" alt="">
+                        <div class="col-lg-4 text-left text-lg-start">
+                           <img class="img-fluid animated zoomIn" src="{{ url('site/img/llll.jpeg')}}" width="275"  alt="">
                         </div>
                     </div>
                 </div>
@@ -321,12 +323,12 @@
 
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
                             <div class="text-center p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/team-1.jpg')}}" alt="">
-                                <h5 class="fw-bold mb-1">Bagaya Mamadou Boubacar </h5>
-                                <small>DGA</small>
+                                <img class="img-fluid rounded-circle mb-4"  src="{{ url('site/img/bag.jpeg')}}" alt="">
+                                <h5 class="fw-bold mb-1"> Mamadou BAGAYA </h5>
+                                <small>CEO</small>
                             </div>
                             <div class="d-flex justify-content-center bg-primary p-3">
                                 <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -335,12 +337,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
                             <div class="text-center p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/team-2.jpg')}}" alt="">
-                                <h5 class="fw-bold mb-1">Fanta Cisse</h5>
-                                <small>Marketing</small>
+                                <img class="img-fluid rounded-circle mb-4" width="250" src="{{ url('site/img/autre.jpeg')}}" alt="">
+                                <h5 class="fw-bold mb-1">Souleymane WELE</h5>
+                                <small>COMPTABLE</small>
                             </div>
                             <div class="d-flex justify-content-center bg-primary p-3">
                                 <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -349,12 +351,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
                             <div class="text-center p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/team-3.jpg')}}" alt="">
-                                <h5 class="fw-bold mb-1">Issouf Cisse</h5>
-                                <small>DGA</small>
+                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/femme.jpeg')}}" alt="">
+                                <h5 class="fw-bold mb-1">Fatima BAH</h5>
+                                <small>COMMERCIAL</small>
+                            </div>
+                            <div class="d-flex justify-content-center bg-primary p-3">
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
+                            <div class="text-center p-4">
+                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/petit.jpeg')}}" alt="">
+                                <h5 class="fw-bold mb-1">Oumar FOFANA</h5>
+                                <small>COMMUNITY MANAGER</small>
+                            </div>
+                            <div class="d-flex justify-content-center bg-primary p-3">
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
+                            <div class="text-center p-4">
+                                <img class="img-fluid rounded-circle mb-4" src="{{ url('site/img/looo.jpeg')}}" style="width: 300px;" alt="">
+                                <h5 class="fw-bold mb-1">Oumar FOFANA</h5>
+                                <small>RESPONSABLE LOG. ET TRANS.</small>
                             </div>
                             <div class="d-flex justify-content-center bg-primary p-3">
                                 <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -388,8 +418,8 @@
                     <div class="col-md-6 col-lg-3">
                         <h5 class="fw-bold text-white mb-4">Adresse</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Banankabougou R77 P99 BKO/MALi</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+223 00 00 00 00 </p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>bekst-express@contact.com</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+223  71 71 73 68 </p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>Hello@bekstexpress.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
